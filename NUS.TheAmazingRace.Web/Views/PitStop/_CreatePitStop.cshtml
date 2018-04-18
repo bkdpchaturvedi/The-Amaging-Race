@@ -2,10 +2,10 @@
 
 @Scripts.Render("~/bundles/jqueryval")
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyD6cYS3IKR8NfnZCYCB9eCMABX9PPvDjXY&callback=pitStopLocate"></script>
-
+<script src="~/Scripts/Custom/PitStop.js"></script>
 <form id="addPitStop">
     @Html.AntiForgeryToken()
-
+    <div><input type="hidden" id="eventId" /></div>
     <div class="row">
     <div class="col-lg-4">
         <div class="form-horizontal">

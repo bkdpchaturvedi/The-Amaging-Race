@@ -4,15 +4,14 @@ function CreatePitStop() {
 
     $("#loaderDiv").show();
     var formData = $("#addPitStop").serialize();
-    alert(formData);
     $.ajax({
         type: "POST",
         url: url,
         data: formData,
-        success: function () {
+        success: function (data) {
             $("#loaderDiv").hide();
-            $("#ModalAdd").modal("hide");
-            window.location.href = "/Event/Index";
+            $("#ModalAddPit").modal("hide");
+            $("#1b").html(data);
         }
     });
 }
@@ -58,4 +57,35 @@ function pitStopLocate() {
             marker.setMap(location);
         }
     
+}
+
+var EditPitStop = function (pitStopId) {
+    var url = "/PitStop/EditPitStop?pitStopId=" + pitStopId;
+
+    $("#ModalBodyEdit").load(url, function () {
+        $("#ModalEdit").modal("show");
+    });
+}
+
+var PitStopDetails = function (pitStopId) {
+    var url = "/PitStop/PitStopDetails?pitStopId=" + pitStopId;
+
+    $("#ModalBodyShow").load(url, function () {
+        $("#ModalShow").modal("show");
+    });
+};
+var UpdatePitSTop = function () {
+    $("#loaderDiv").show();
+    var formData = $("#editPitForm").serialize();
+    alert(formData);
+    $.ajax({
+        type: "POST",
+        url: "/PitStop/AddPitStop",
+        data: formData,
+        success: function () {
+            $("#loaderDiv").hide();
+            $("#ModalEdit").modal("hide");
+            
+        }
+    })
 }

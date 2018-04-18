@@ -45,17 +45,19 @@ var ShowEvent = function (eventId) {
 
 var ShowPitstop = function (eventId) {
     $("#loaderDiv").show();
-    alert("Before" + eventId);
-    
-    var url = "/PitStop/GetPitStopData";
+    var url = "/PitStop/Index";
     $.ajax({
         type: "GET",
         url: url,
         data: { EventId: eventId },
         success: function (data) {
-            $("#PitstopLoad").html(data)
-            window.location.href= "/Event/Index?EventID=" + eventId;
-           
+            ///$("#PitstopLoad").html(data);
+            alert("success");
+            $("#1b").html(data);
+            document.getElementById("eventId").value = eventId;
+            //alert(document.getElementById("eventId").value);
+            //window.location.href= "/Event/Index?EventID=" + eventId;
+            //$("#PitstopLoad").show();
         }
 
     });
@@ -63,7 +65,6 @@ var ShowPitstop = function (eventId) {
 
 var AddPitStop = function () {
     var url = "/PitStop/CreatePitStop";
-
     $("#ModalBodyAddPit").load(url, function () {
         $("#ModalAddPit").modal("show");
     });

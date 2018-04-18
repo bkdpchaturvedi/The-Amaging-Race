@@ -91,6 +91,17 @@ namespace NUS.TheAmagingRace.BAL
             return events.ToList();
         }
 
+        public List<Event> CurrentEvent()
+        {
+            var events = from s in db.Events
+                         select s;
+            
+            
+           events = events.Where(s => s.StartDate>=DateTime.Now && s.EndDate<=DateTime.Now);
+            
+            return events.ToList();
+        }
+
 
     }
 }

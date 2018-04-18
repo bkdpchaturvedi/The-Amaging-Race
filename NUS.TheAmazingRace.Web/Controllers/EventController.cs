@@ -23,12 +23,15 @@ namespace NUS.TheAmazingRace.Web.Controllers
         private List<PitStop> pitStop = new List<PitStop>();
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int eventId=0)
         {
-            
+            //eventManagement = new EventManagement();
             List<Event> events = eventBAL.GetEventList();
-                      
-           
+            //List<PitStop> pitStops = pitStopBAL.getPitStopOfEvent(eventId);
+            
+                //eventManagement.PitStops = pitStops;
+            
+            //eventManagement.Events = events;
             return View(events.ToList());
         }
 
@@ -36,11 +39,11 @@ namespace NUS.TheAmazingRace.Web.Controllers
         [HttpPost]
         public ActionResult Index(Event eventModel)
         {
-           
+            //eventManagement = new EventManagement();
             string currentUser= User.Identity.GetUserName();
-            List<Event> Events = eventBAL.EditEventList(eventModel, currentUser);
-          
-            return View(Events);
+            //eventManagement.Events = eventBAL.EditEventList(eventModel, currentUser);
+            //eventManagement.PitStops = pitStop;
+            return View(eventBAL.EditEventList(eventModel, currentUser).ToList());
         }
 
         

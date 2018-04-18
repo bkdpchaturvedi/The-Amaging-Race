@@ -1,4 +1,4 @@
-﻿@model   IEnumerable<NUS.TheAmagingRace.DAL.Event>
+﻿@model IEnumerable<NUS.TheAmagingRace.DAL.Event>
 
 @{
     Layout = "~/Views/Shared/_StaffLayout.cshtml";
@@ -99,12 +99,12 @@
 
             </ul>
 
-            <div class="tab-content clearfix">
-                <div class="tab-pane active" id="1b">
-                    <div id="LoadingPitStop">
-                    @{Html.RenderAction("Index", "Pitstop");}
-                         </div>
-                </div>
+           <div class="tab-content clearfix">
+               <div class="tab-pane active" id="1b">
+                   
+                       @{Html.RenderAction("Index", "PitStop");}
+                   
+               </div>
                 <div class="tab-pane" id="2b">
                     <h3>We use the class nav-pills instead of nav-tabs which automatically creates a background color for the tab</h3>
                 </div>

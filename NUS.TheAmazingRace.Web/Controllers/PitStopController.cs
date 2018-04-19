@@ -23,15 +23,27 @@ namespace NUS.TheAmazingRace.Web.Controllers
             return PartialView("_Index", pitStopBAL.getPitStopOfEvent(EventID));
         }
 
-        public JsonResult GetPitStopData(int EventID)
+        public JsonResult GetPitStopData()
         {
-
+            int EventID = Convert.ToInt32(Session["eventId"]);
             return Json(pitStopBAL.getPitStopOfEvent(EventID),JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetPitStop()
+        {
+            int pitStopId = Convert.ToInt32(Session["pitStopId"]);
+            return Json(pitStopBAL.getPitStopOfPitStopId(pitStopId), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult CreatePitStop()
         {
            return PartialView("_CreatePitStop");
+        }
+
+        public ActionResult EditPitStops(int pitStopId)
+        {
+            Session["pitStopId"] = pitStopId;
+            return PartialView("_EditPitStop", pitStopBAL.GetSelectedPitStop(pitStopId));
         }
 
         [HttpPost]
@@ -41,6 +53,13 @@ namespace NUS.TheAmazingRace.Web.Controllers
             String currentUser = User.Identity.GetUserName();
             List<PitStop> pitStops = pitStopBAL.CreatePitStopList(pitStop, currentUser, eventId);
             return PartialView("_Index", pitStops);
+        }
+
+        public ActionResult DeletePitStop(int pitStopId)
+        {
+            int eventID = Convert.ToInt32(Session["eventId"]);
+            List<PitStop> pitStop = pitStopBAL.DeletePitStopfromList(pitStopId, eventID);
+            return PartialView("_Index", pitStop);
         }
     }
 }

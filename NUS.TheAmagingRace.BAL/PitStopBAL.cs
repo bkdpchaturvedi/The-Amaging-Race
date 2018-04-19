@@ -25,8 +25,11 @@ namespace NUS.TheAmagingRace.BAL
                 editPitStops.PitStopName = pitStop.PitStopName;
                 editPitStops.SequenceNumber = pitStop.SequenceNumber;
                 editPitStops.Address = pitStop.Address;
+                editPitStops.Latitude = pitStop.Latitude;
+                editPitStops.Longitude = pitStop.Longitude;
                 editPitStops.LastModifiedBy = currentUser;
-                editPitStops.Event.EventID = eventId;
+                Event currentEvent = db.Events.SingleOrDefault(x => x.EventID == eventId);
+                pitStop.Event = currentEvent;
                 editPitStops.LastModifiedAt = DateTime.Now;
                 db.SaveChanges();
 
@@ -57,6 +60,15 @@ namespace NUS.TheAmagingRace.BAL
             return pitstops.ToList();
         }
 
+        public List<PitStop> getPitStopOfPitStopId(int pitStopId)
+        {
+            var pitstops = from s in db.PitStops
+                           select s;
+            pitstops = pitstops.Where(s => s.PitStopID == pitStopId);
+
+            return pitstops.ToList();
+        }
+
         public PitStop GetValuesToEdit(int pitStopId)
         {
             PitStop editPitStops = db.PitStops.SingleOrDefault(x => x.PitStopID == pitStopId);
@@ -74,6 +86,16 @@ namespace NUS.TheAmagingRace.BAL
             PitStop currentPitStop = db.PitStops.SingleOrDefault(x => x.PitStopID == PitSTopId);
             return currentPitStop;
 
+        }
+
+        public List<PitStop> DeletePitStopfromList(int pitStopId, int eventId)
+        {
+            var pitStop = db.PitStops.Find(pitStopId);
+            PitStop stops = db.PitStops.SingleOrDefault(x => x.PitStopID == pitStopId);
+            db.PitStops.Remove(stops);
+            db.SaveChanges();
+            //result = true;
+            return getPitStopOfEvent(eventId);
         }
 
     }

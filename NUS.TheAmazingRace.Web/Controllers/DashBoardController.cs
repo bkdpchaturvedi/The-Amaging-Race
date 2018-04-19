@@ -19,6 +19,11 @@ namespace NUS.TheAmazingRace.Web.Controllers
         public PartialViewResult CurrentEvent()
         {
             return PartialView("_CurrentEvent", eventBAL.CurrentEvent());
-    }
+        }
+
+        public PartialViewResult UpcomingEvent()
+        {
+            return PartialView("_UpcomingEvent", eventBAL.UpcomingEvents());
+        }
     }
 }

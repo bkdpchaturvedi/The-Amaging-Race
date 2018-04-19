@@ -2,7 +2,7 @@
 @Scripts.Render("~/bundles/jqueryval")
 <script src="~/Scripts/Custom/EventManagement.js"></script>
 <script src="~/Scripts/Custom/PitStop.js"></script>
-@if (Model.Count() > 0)
+@if (Model.Count() >= 0)
 {
     <div id="eventIdDiv">
         <input type="hidden" id="eventId" value="" />
@@ -41,7 +41,19 @@
             }
             <input type="hidden" id="hiddenEventId" />
             <div class="col-lg-8">
+                @if (Model.Count() > 0)
+                {
                 <div class="col-lg-8" id="mainMap" style="width:400px;height:200px;background:yellow"></div>
+                }
+                else
+                {
+                <div class="NorecordFound">
+                    <br />
+                    <p> No PitStop to display </p>
+
+                    <p> Click create to add Pitstop</p>
+                </div>
+                }
             </div>
         </div>
     </div>

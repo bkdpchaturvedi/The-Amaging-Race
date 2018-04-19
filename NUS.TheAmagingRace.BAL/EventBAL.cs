@@ -97,7 +97,7 @@ namespace NUS.TheAmagingRace.BAL
                          select s;
             
             
-           events = events.Where(s => s.StartDate>=DateTime.Now && s.EndDate<=DateTime.Now);
+           events = events.Where(s => s.StartDate<=DateTime.Now && s.EndDate>=DateTime.Now);
             
             return events.ToList();
         }

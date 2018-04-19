@@ -11,6 +11,8 @@ function CreatePitStop() {
         success: function (data) {
             $("#loaderDiv").hide();
             $("#ModalAddPit").modal("hide");
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
             $("#1b").html(data);
         }
     });

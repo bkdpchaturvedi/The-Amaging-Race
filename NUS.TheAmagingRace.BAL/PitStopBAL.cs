@@ -45,7 +45,7 @@ namespace NUS.TheAmagingRace.BAL
                 db.SaveChanges();
             }
 
-            return db.PitStops.ToList();
+            return getPitStopOfEvent(eventId);
         }
 
         public List<PitStop> getPitStopOfEvent(int eventId)

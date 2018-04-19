@@ -51,13 +51,8 @@ var ShowPitstop = function (eventId) {
         url: url,
         data: { EventId: eventId },
         success: function (data) {
-            ///$("#PitstopLoad").html(data);
-            alert("success");
             $("#1b").html(data);
             document.getElementById("eventId").value = eventId;
-            //alert(document.getElementById("eventId").value);
-            //window.location.href= "/Event/Index?EventID=" + eventId;
-            //$("#PitstopLoad").show();
         }
 
     });

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -152,17 +153,33 @@ namespace NUS.TheAmazingRace.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new TARUser { UserName = model.Email, Email = model.Email };
+                if (model.ImageFile == null)
+                {
+                    model.ImagePath = "~/Content/Images/Empty_pic.png";
+                }
+                else
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
+                    string extension = Path.GetExtension(model.ImageFile.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    model.ImagePath = "~/Content/Images/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Content/Images/"), fileName);
+                    model.ImageFile.SaveAs(fileName);
+                }
+               
+                var user = new TARUser {CreatedAt=DateTime.Now,LastModifiedAt=DateTime.Now, DisplayName = model.Name,ImagePath=model.ImagePath,UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    
+                    ModelState.Clear();
 
                     return RedirectToAction("Index", "Home");
                 }

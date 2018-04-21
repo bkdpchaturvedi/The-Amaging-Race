@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 
 
+    @Scripts.Render("~/bundles/jquery")
     @*@Scripts.Render("~/bundles/modernizr")*@
 
 </head>
@@ -40,7 +41,7 @@
 
                 </li>
                 <li>
-                    <a href="#">
+                    <a href=" @Url.Action("Index","Member")">
                         <i class="glyphicon glyphicon-link"></i>
                         Member Management
                     </a>

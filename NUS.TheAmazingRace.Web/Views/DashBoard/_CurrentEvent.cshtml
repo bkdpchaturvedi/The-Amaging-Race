@@ -1,85 +1,70 @@
 ﻿@model IEnumerable<NUS.TheAmagingRace.DAL.Event>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-
-<div class="row">
-    <div id="EventListWrapper" class="col-lg-3">
-
+<script src="~/Scripts/Custom/DashBoard.js"></script>
 
         <p align="center" style="font-size:16px;color:white">
             Current Event
 
         </p>
-
-
-
         @if (Model.Count() > 0)
+    {
+
+
+        foreach (var v in Model)
         {
-
-
-            foreach (var v in Model)
-            {
-
-
-
-
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-header">
-                            <div class="card-heading">
-                                <div style="float:right">
-                                    <a href="#" class="glyphicon glyphicon-eye-open" onclick="ShowEvent(@v.EventID)"></a>&nbsp;
-                                </div>
-                                <h5 align="center"><strong>@v.EventName</strong> </h5>
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-header">
+                        <div class="card-heading">
+                            <div style="float:right">
+                                <a href="#" class="glyphicon glyphicon-eye-open" onclick="ShowEvent(@v.EventID)"></a>&nbsp;
                             </div>
-
-                        </div>
-                        <div class="card-body">
-                            <p class="card-p">
-                                <i>@v.EventDescription</i><br />
-                                Total Pitstops&nbsp;: @v.TotalPitStops<br />
-                                Total Teams &nbsp; : @v.TotalTeams<br />
-
-                            </p>
+                            <h5 align="center"><strong>@v.EventName</strong> </h5>
                         </div>
 
-                        <div class="card-footer" align="center">
+                    </div>
+                    <div class="card-body" onclick="ShowDashBoardPitstop(@v.EventID)">
+                        <p class="card-p">
+                            <i>@v.EventDescription</i><br />
+                            Total Pitstops&nbsp;: @v.TotalPitStops<br />
+                            Total Teams &nbsp; : @v.TotalTeams<br />
 
-
-                            This Event Ends on : @v.EndDate.Day-@v.EndDate.Month-@v.EndDate.Year
-                        </div>
+                        </p>
                     </div>
 
+                    <div class="card-footer" align="center">
 
+
+                        This Event Ends on : @v.EndDate.Day-@v.EndDate.Month-@v.EndDate.Year
+                    </div>
                 </div>
 
-            }
-            <div align="center">
-                <br />
-                <div style="color:white!important;cursor: pointer;" id="upcomingSlider"> click here to see Upcoming Events</div>
-            </div>
-
-
-
-
-
-            <input type="hidden" id="hiddenEventId" />
-
-
-        }
-        else
-        {
-            <div class="NorecordFound">
-                <br />
-                <p> There is no event today check Upcoming Events for Next Event </p>
-
 
             </div>
-        }
+
+    }
+    <div align="center">
+        <br />
+        <div style="color:white!important;cursor: pointer;" id="upcomingSlider"> click here to see Upcoming Events</div>
+    </div>
+
+
+
+
+
+    <input type="hidden" id="hiddenEventId" />
+
+
+}
+else
+{
+    <div class="NorecordFound">
+        <br />
+        <p> There is no event today check Upcoming Events for Next Event </p>
+
 
     </div>
-    
-
-</div>
+}
 
 <div class="modal fade" id="ModalShow">
     <div class="modal-dialog">

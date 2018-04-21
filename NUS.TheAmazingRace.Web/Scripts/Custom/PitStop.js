@@ -150,7 +150,7 @@ var EditPitStop = function (pitStopId) {
     });
 }
 
-var PitStopDetails = function (pitStopId) {
+var VewPitstop = function (pitStopId) {
     var url = "/PitStop/PitStopDetails?pitStopId=" + pitStopId;
 
     $("#ModalBodyShow").load(url, function () {

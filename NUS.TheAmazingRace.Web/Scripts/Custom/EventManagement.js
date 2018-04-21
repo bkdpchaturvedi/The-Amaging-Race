@@ -88,23 +88,30 @@ var allPitStops = function () {
         latlngCenter = new google.maps.LatLng(1.281766, 103.818346);
         mapOptions = {
             center: latlngCenter,
-            zoom: 13,
+            zoom: 12,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
         var map = new google.maps.Map(document.getElementById("mainMap"), mapOptions);
         map.panTo(new google.maps.LatLng(data[0].Latitude, data[0].Longitude));
         var marker;
+        var address;
+        var name;
         for (i = 0; i < data.length; i++) {
-            latlngPit = new google.maps.LatLng(data[i].Latitude, data[i].Longitude)
-            
+            latlngPit = new google.maps.LatLng(data[i].Latitude, data[i].Longitude);
+            if (data[i + 1]) {
+                latlngNext = new google.maps.LatLng(data[i+1].Latitude, data[i+1].Longitude);
+            }
+            address = data[i].Address;
+            name =i +1 + ". " + data[i].PitStopName;
              marker = new google.maps.Marker({
-                position: latlngPit,
-                title: 'PitStop',
+                 position: latlngPit,
+                 title: address,
+                 label: { text: name, color: "green" },
                 map: map
             });
-            
-            marker.setMap(latlngPit);
+            calcRoute(latlngPit, latlngNext, map);
+            //marker.setMap(latlngPit);
         }
         //var map = new google.maps.Map(document.getElementById("mainMap"), mapOptions);
         
@@ -123,6 +130,32 @@ var allPitStops = function () {
                 $('#Latitude').val(results[0].geometry.location.lat);
                 $('#Longitude').val(results[0].geometry.location.lng);
             }
+        });
+    }
+
+    function calcRoute(latlngPit, latlngNext, map) {
+
+        var directionsService = new google.maps.DirectionsService();
+        var directionsDisplay = new google.maps.DirectionsRenderer({ map: map, suppressMarkers: true });
+        
+        var start = latlngPit;
+        var end = latlngNext;
+        var request = {
+            origin: start,
+            destination: end,
+            
+            travelMode: 'WALKING'
+        };
+        directionsService.route(request, function (result, status) {
+            if (status == 'OK') {
+                directionsDisplay.setDirections(result);
+                var marker = new google.maps.Marker({
+                    position: result.position,
+                    label: "ABC",
+                    map: map                });
+            }
+            directionsDisplay.setMap(map);
+           
         });
     }
 

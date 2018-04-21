@@ -93,12 +93,15 @@
             var formData = $("#addForm").serialize();
             $.ajax({
                 type: "POST",
-                url: "/Event/Index",
+                url: "/Event/EventsList",
                 data: formData,
-                success: function () {
+                success: function (data) {
                     $("#loaderDiv").hide();
                     $("#ModalAdd").modal("hide");
-                    window.location.href = "/Event/Index";
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
+                    $("#LoadEvent").html(data);
+                    
                 }
             })
 

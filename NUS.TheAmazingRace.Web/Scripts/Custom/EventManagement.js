@@ -43,6 +43,10 @@ var ShowEvent = function (eventId) {
     });
 };
 
+var OnSuccess =  function (data) {
+    $("#LoadEvent").html(data); 
+}  
+
 var ShowPitstop = function (eventId) {
     $("#loaderDiv").show();
     var url = "/PitStop/Index";

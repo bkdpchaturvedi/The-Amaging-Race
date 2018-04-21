@@ -92,12 +92,13 @@
             var formData = $("#editForm").serialize();
             $.ajax({
                 type: "POST",
-                url: "/Event/Index",
+                url: "/Event/EventsList",
                 data: formData,
-                success: function () {
+                success: function (data) {
                     $("#loaderDiv").hide(); 
                     $("#ModalEdit").modal("hide");
-                    window.location.href = "/Event/Index";
+                    $("#LoadEvent").html(data);
+                    
                 }
             })
 

@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace NUS.TheAmazingRace.Web.Controllers
 {
+    [Authorize(Roles = "Staff, Admin")]
     public class PitStopController : Controller
     {
         private PitStopBAL pitStopBAL = new PitStopBAL();

@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace NUS.TheAmazingRace.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Staff, Admin")]
 
     public class EventController : Controller
     {
@@ -19,47 +19,35 @@ namespace NUS.TheAmazingRace.Web.Controllers
        
         private EventBAL eventBAL = new EventBAL();
         private PitStopBAL pitStopBAL = new PitStopBAL();
-        //private EventManagement eventManagement;
         private List<PitStop> pitStop = new List<PitStop>();
 
         [HttpGet]
-        public ActionResult Index(int eventId=0)
+        public ActionResult Index()
         {
-            //eventManagement = new EventManagement();
-            List<Event> events = eventBAL.GetEventList();
-            //List<PitStop> pitStops = pitStopBAL.getPitStopOfEvent(eventId);
-            
-                //eventManagement.PitStops = pitStops;
-            
-            //eventManagement.Events = events;
-            return View(events.ToList());
+           
+            return View();
         }
 
+
+        public PartialViewResult EventsList()
+        {
+            List<Event> events = eventBAL.GetEventList();
+            return PartialView("_EventsList",events.ToList());
+        }
 
         [HttpPost]
-        public ActionResult Index(Event eventModel)
+        public ActionResult EventsList(Event eventModel)
         {
-            //eventManagement = new EventManagement();
             string currentUser= User.Identity.GetUserName();
-            //eventManagement.Events = eventBAL.EditEventList(eventModel, currentUser);
-            //eventManagement.PitStops = pitStop;
-            return View(eventBAL.EditEventList(eventModel, currentUser).ToList());
+            return PartialView("_EventsList", eventBAL.EditEventList(eventModel, currentUser).ToList());
         }
 
-        
-        //public ActionResult LoadPitStops(int eventID)
-        //{
-        //    eventManagement.PitStops=pitStopBAL.getPitStopOfEvent(eventID);
-        //    eventManagement.Events = eventBAL.GetEventList();
-
-        //    return View("Index",eventManagement);
-        //}
 
 
         [HttpPost]
         public ActionResult Search(string searchString)
         {
-            return View("Index",eventBAL.SearchEvent(searchString));
+            return PartialView("_EventsList", eventBAL.SearchEvent(searchString).ToList());
         }
 
 

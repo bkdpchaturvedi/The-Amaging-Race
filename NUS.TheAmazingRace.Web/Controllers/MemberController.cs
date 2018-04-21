@@ -1,4 +1,8 @@
-﻿using System;
+﻿using NUS.TheAmagingRace.BAL;
+using NUS.TheAmagingRace.DAL;
+using NUS.TheAmagingRace.DAL.Reporsitory;
+using NUS.TheAmagingRace.DAL.UnitOfWork;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +13,15 @@ namespace NUS.TheAmazingRace.Web.Controllers
     [Authorize(Roles ="Admin")]
     public class MemberController : Controller
     {
+        IMemberBAL memberBAL = null;
+        public MemberController()
+        {
+            memberBAL = new MemberBAL();
+        }
+        protected MemberController(IMemberBAL memberBAL)
+        {
+            this.memberBAL = memberBAL;
+        }
         // GET: Member
         public ActionResult Index()
         {
@@ -16,6 +29,7 @@ namespace NUS.TheAmazingRace.Web.Controllers
             //Get all Administrators
             //Get All Members
             //Get All Staff
+           
             return View();
         }
 
@@ -89,6 +103,26 @@ namespace NUS.TheAmazingRace.Web.Controllers
             {
                 return View();
             }
+        }
+        [HttpGet]
+        public ActionResult LoadAdministrators()
+        {
+           var Administrators= memberBAL.GetAllTARAdministrators();
+            return PartialView(Administrators);
+        }
+
+        [HttpGet]
+        public ActionResult LoadMembers()
+        {
+            var members = memberBAL.GetAllMember();
+            return PartialView(members);
+        }
+
+        [HttpGet]
+        public ActionResult LoadStaff()
+        {
+            var Staff = memberBAL.GetAllStaff();
+            return PartialView(Staff);
         }
     }
 }

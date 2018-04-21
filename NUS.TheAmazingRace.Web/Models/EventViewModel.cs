@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
-namespace NUS.TheAmagingRace.DAL
+namespace NUS.TheAmazingRace.Web.Models
 {
-    public class Event: BaseEntity
+    public class EventViewModel
     {
-        
-        [Key]
+      
         public int EventID { get; set; }
 
         [Required]
         [Display(Name = "Event Name")]
         public string EventName { get; set; }
 
-       
+
         [Display(Name = "Description")]
         public string EventDescription { get; set; }
 
@@ -26,7 +27,7 @@ namespace NUS.TheAmagingRace.DAL
         [Display(Name = "City")]
         public string EventCity { get; set; }
         [Required]
-        [DataType(DataType.Date,ErrorMessage ="Enter Correct Format")]
+        [DataType(DataType.Date, ErrorMessage = "Enter Correct Format")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
@@ -43,11 +44,6 @@ namespace NUS.TheAmagingRace.DAL
         [Required]
         [Display(Name = "Teams")]
         public int TotalTeams { get; set; }
-
-
-        public virtual ICollection<Team> Teams { get; set; }
-
-        public virtual ICollection<PitStop> PitStops { get; set; }
 
     }
 }

@@ -28,9 +28,9 @@ namespace NUS.TheAmagingRace.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
-
+            modelBuilder.Entity<PitStop>().HasOptional<Event>(m=>m.Event).WithMany().WillCascadeOnDelete(true);
+            modelBuilder.Entity<Team>().HasOptional<Event>(m => m.Event).WithMany().WillCascadeOnDelete(true);
             //modelBuilder.Entity<TARUser>()
             // .Property(c => c.Id)
             // .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
@@ -104,6 +104,6 @@ namespace NUS.TheAmagingRace.DAL
             return new TARDBContext();
         }
 
-
+       // public System.Data.Entity.DbSet<NUS.TheAmagingRace.DAL.TARUser> TARUsers { get; set; }
     }
 }

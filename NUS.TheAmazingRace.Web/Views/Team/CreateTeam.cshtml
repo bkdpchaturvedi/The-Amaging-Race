@@ -1,0 +1,68 @@
+﻿@model NUS.TheAmagingRace.BusinessModels.TeamViewModel
+
+<form id="addTeamForm">
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-horizontal">
+        <h4>TeamViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TeamID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TeamID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TeamID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TeamName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TeamName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TeamName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" id="btnTeamCreate" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    $(document).ready(function () {
+        $("#btnTeamCreate").click(function () {
+            $("#loaderDiv").show();
+            var EventID = $("hiddenEventId").val();
+            var formData = $("#addTeamForm").serialize();
+            var inputdata = {
+                "FormData": formData,
+                "EventID": EventID
+            }
+            $.ajax({
+                type: "POST",
+                url: "/Team/CreateTeam",
+                data: inputdata,
+                success: function () {
+                    $("#loaderDiv").hide();
+                    $("#ModalAdd").modal("hide");
+                     var EventID = $("hiddenEventId").val();
+                      if (EventID != "" != null) {
+                    ajaxGet("loaderDiv", '@Url.Action("LoadTeams","Team")', { "EventID": EventID }, function (data) {
+                        $("#2b").html(data);
+                    }, function (status) { });
+                    }
+
+                }
+            })
+
+        })
+    })
+</script>
+

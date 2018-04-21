@@ -520,3 +520,29 @@ body {
     border-radius: 0px 4px 4px 4px;
     margin-top:-3px;
 }
+
+@media (max-width: 768px) {
+    a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+        top: auto;
+        bottom: 5px;
+        right: 50%;
+        -webkit-transform: translateX(50%);
+        -ms-transform: translateX(50%);
+        transform: translateX(50%);
+        display: none;
+    }
+}
+
+a[aria-expanded="true"]::before {
+    content: '\e260';
+   
+}
+
+a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+    content: '\e259';
+    display: none;
+    position: absolute;
+    right: 20px;
+    font-family: 'Glyphicons Halflings';
+    font-size: 0.6em;
+}

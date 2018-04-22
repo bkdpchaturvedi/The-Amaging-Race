@@ -45,6 +45,13 @@ namespace NUS.TheAmagingRace.BusinessModels
         [Required]
         [Display(Name = "Teams")]
         public int TotalTeams { get; set; }
+        public string CreatedBy { get; set; }
+        public string LastModifiedBy { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime LastModifiedAt { get; set; }
 
+        public virtual ICollection<TeamViewModel> Teams { get; set; }
+
+        public ICollection<PitStopViewModel> PitStops { get; set; }
     }
 }

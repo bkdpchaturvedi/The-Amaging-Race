@@ -22,7 +22,8 @@ namespace NUS.TheAmagingRace.BAL
         {
             if (eventModel.EventID > 0)
             {
-                Event editEvents = db.Events.SingleOrDefault(x => x.EventID == eventModel.EventID);
+                Event editEvents = db.Events.Include("Teams").Include("PitStops").SingleOrDefault(x => x.EventID == eventModel.EventID);
+                
                 editEvents.EventName = eventModel.EventName;
                 editEvents.EventDescription = eventModel.EventDescription;
                 editEvents.EventCountry = eventModel.EventCountry;

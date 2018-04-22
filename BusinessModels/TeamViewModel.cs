@@ -16,10 +16,16 @@ namespace NUS.TheAmagingRace.BusinessModels
         [Required]
         [Display(Name = "Team Name")]
         public string TeamName { get; set; }
+        
         public EventViewModel EventViewModel { get; set; }
         [Required]
         [Display(Name = "Team Members")]
         public virtual ICollection<TARUserViewModel> Members { get; set; }
+
+        public string CreatedBy { get; set; }
+        public string LastModifiedBy { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime LastModifiedAt { get; set; }
 
 
     }

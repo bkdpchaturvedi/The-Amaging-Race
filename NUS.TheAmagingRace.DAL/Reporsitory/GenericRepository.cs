@@ -103,6 +103,13 @@ namespace NUS.TheAmagingRace.DAL.Reporsitory
         {
             return DbSet.First<TEntity>(predicate);
         }
+        public IEnumerable<TEntity> QueryObjectGraph(System.Linq.Expressions.Expression<Func<TEntity, bool>> filter, string children)
+
+        {
+
+            return DbSet.Include(children).Where(filter);
+
+        }
         #endregion
 
 

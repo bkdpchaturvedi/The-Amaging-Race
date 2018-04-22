@@ -39,13 +39,12 @@ namespace NUS.TheAmazingRace.Web.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Staff")]
-        public ActionResult CreateTeam(int EventID, [Bind(Prefix ="FormData")]TeamViewModel viewModel)
+        public ActionResult CreateTeam(TeamViewModel viewModel)
         {
            
-            viewModel.EventViewModel = teamBAL.GetEventById(EventID);
+            viewModel.EventViewModel = teamBAL.GetEventById(viewModel.EventViewModel.EventID);
 
-
+            teamBAL.SaveTeam(viewModel);
             return PartialView(viewModel);
         }
     }

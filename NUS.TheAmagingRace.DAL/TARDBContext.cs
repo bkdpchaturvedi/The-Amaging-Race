@@ -18,7 +18,7 @@ namespace NUS.TheAmagingRace.DAL
         {
             Database.SetInitializer<TARDBContext>(new TestDataInitializer());
             Configuration.ProxyCreationEnabled = false;
-            Configuration.LazyLoadingEnabled = false;
+            Configuration.LazyLoadingEnabled = true;
         }
         public DbSet<Event> Events { get; set; }
         public DbSet<Team> Teams { get; set; }
@@ -30,6 +30,7 @@ namespace NUS.TheAmagingRace.DAL
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             modelBuilder.Entity<PitStop>().HasOptional<Event>(m=>m.Event).WithMany().WillCascadeOnDelete(true);
+ 
             modelBuilder.Entity<Team>().HasOptional<Event>(m => m.Event).WithMany().WillCascadeOnDelete(true);
             //modelBuilder.Entity<TARUser>()
             // .Property(c => c.Id)

@@ -39,7 +39,7 @@ namespace NUS.TheAmagingRace.DAL
             {
                 var store = new UserStore<TARUser>(context);
                 var manager = new UserManager<TARUser>(store);
-                var user = new TARUser { UserName = "Admin@Admin.com", Email = "Admin@Admin.com" };
+                var user = new TARUser { UserName = "Admin@Admin.com", Email = "Admin@Admin.com", DisplayName = "Admin", ImagePath = "~/Content/Images/Empty_pic.png" };
                 var result= manager.Create(user, "Admin@123");
 
             }
@@ -47,7 +47,7 @@ namespace NUS.TheAmagingRace.DAL
             {
                 var store = new UserStore<TARUser>(context);
                 var manager = new UserManager<TARUser>(store);
-                var user = new TARUser { UserName = "Staff@Staff.com", Email = "Staff@Staff.com" };
+                var user = new TARUser { UserName = "Staff@Staff.com", Email = "Staff@Staff.com", DisplayName = "Staff", ImagePath = "~/Content/Images/Empty_pic.png" };
                 var result = manager.Create(user, "Staff@123");
 
             }
@@ -55,7 +55,7 @@ namespace NUS.TheAmagingRace.DAL
             {
                 var store = new UserStore<TARUser>(context);
                 var manager = new UserManager<TARUser>(store);
-                var user = new TARUser { UserName = "Member@Member.com", Email = "Member@Member.com" };
+                var user = new TARUser { UserName = "Member@Member.com", Email = "Member@Member.com",DisplayName="Member",ImagePath= "~/Content/Images/Empty_pic.png" };
                 var result = manager.Create(user, "Member@123");
 
             }
@@ -69,7 +69,7 @@ namespace NUS.TheAmagingRace.DAL
                 var manager = new UserManager<TARUser>(store);
                 var user = context.Users.FirstOrDefault(r => r.UserName == "Admin@Admin.com");
                 var role = context.Roles.FirstOrDefault(r => r.Name == "Admin");
-                manager.AddToRoles(user.Id, new string[] { role.Id});
+                user.Roles.Add(new IdentityUserRole() { UserId = user.Id, RoleId = role.Id });
 
             }
             if (context.Users.Any(r => r.UserName == "Staff@Staff.com"))
@@ -78,7 +78,7 @@ namespace NUS.TheAmagingRace.DAL
                 var manager = new UserManager<TARUser>(store);
                 var user = context.Users.FirstOrDefault(r => r.UserName == "Staff@Staff.com");
                 var role = context.Roles.FirstOrDefault(r => r.Name == "Staff");
-                manager.AddToRoles(user.Id, new string[] { role.Id });
+                user.Roles.Add(new IdentityUserRole() { UserId = user.Id, RoleId = role.Id });
 
             }
             if (context.Users.Any(r => r.UserName == "Member@Member.com"))
@@ -87,7 +87,7 @@ namespace NUS.TheAmagingRace.DAL
                 var manager = new UserManager<TARUser>(store);
                 var user = context.Users.FirstOrDefault(r => r.UserName == "Member@Member.com");
                 var role = context.Roles.FirstOrDefault(r => r.Name == "Member");
-                manager.AddToRoles(user.Id, new string[] { role.Id });
+                user.Roles.Add(new IdentityUserRole() { UserId = user.Id, RoleId = role.Id });
 
             }
             context.SaveChanges();

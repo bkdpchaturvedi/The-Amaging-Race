@@ -13,7 +13,7 @@
                         <a href="#1b" data-toggle="tab">PitStops</a>
                     </li>
                     <li>
-                        <a href="#2b" data-toggle="tab">Teams</a>
+                        <a href="#2b" data-toggle="tab" id="TeamsTabbtn">Teams</a>
                     </li>
 
 
@@ -30,7 +30,11 @@
 
                     </div>
                     <div class="tab-pane" id="2b">
-                        <h3>We use the class nav-pills instead of nav-tabs which automatically creates a background color for the tab</h3>
+                        <div class="NorecordFound">
+                            <br />
+
+                            <p> Select an event to view Teams</p>
+                        </div>
                     </div>
 
                 </div>
@@ -128,7 +132,21 @@
     </div>
 
 
+    <script>
 
+    $("#TeamsTabbtn").click(function (e) {
+        var EventID = $("#hiddenEventId").val();
+        if (EventID != "" != null) {
+            debugger;
+            ajaxGet("loaderDiv", '@Url.Action("LoadTeams","Team")', { "EventID": EventID }, function (data) {
+
+                $("#2b").html(data);
+            }, function (status) { });
+        }
+    });
+
+
+    </script>
 
 
 

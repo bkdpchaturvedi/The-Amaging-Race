@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<NUS.TheAmagingRace.BusinessModels.TeamViewModel>
 
 <p>
-    <button class="btn btn-success" onclick="AddTeam(2)">Create Team</button>
+    <button class="btn btn-success" onclick="AddTeam()">Create Team</button>
 </p>
 
 <div class="panel-group" onload="LoadPanels" id="TARPanels">
@@ -31,8 +31,9 @@
     }
 </div>
 <script>
-    var AddTeam = function (eventId) {
+    var AddTeam = function () {
         debugger;
+        var eventId = $("#hiddenEventId").val();
         ajaxGet("LoaderDiv", '@Url.Action("CreateTeam","Team")', { EventID: eventId }, function (data) {
 
             $("#ModalBodyAdd").html(data);

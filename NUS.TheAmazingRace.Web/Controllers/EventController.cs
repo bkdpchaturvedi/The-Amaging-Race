@@ -44,7 +44,7 @@ namespace NUS.TheAmazingRace.Web.Controllers
 
 
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult Search(string searchString)
         {
             return PartialView("_EventsList", eventBAL.SearchEvent(searchString).ToList());

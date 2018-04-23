@@ -1,0 +1,11 @@
+C:\Users\Gowtham\source\repos\WebAPITAR\WebAPITAR\bin\Debug\netcoreapp2.0\WebAPITAR.deps.json
+C:\Users\Gowtham\source\repos\WebAPITAR\WebAPITAR\bin\Debug\netcoreapp2.0\WebAPITAR.runtimeconfig.json
+C:\Users\Gowtham\source\repos\WebAPITAR\WebAPITAR\bin\Debug\netcoreapp2.0\WebAPITAR.runtimeconfig.dev.json
+C:\Users\Gowtham\source\repos\WebAPITAR\WebAPITAR\bin\Debug\netcoreapp2.0\WebAPITAR.dll
+C:\Users\Gowtham\source\repos\WebAPITAR\WebAPITAR\bin\Debug\netcoreapp2.0\WebAPITAR.pdb
+C:\Users\Gowtham\source\repos\WebAPITAR\WebAPITAR\obj\Debug\netcoreapp2.0\WebAPITAR.csprojResolveAssemblyReference.cache
+C:\Users\Gowtham\source\repos\WebAPITAR\WebAPITAR\obj\Debug\netcoreapp2.0\WebAPITAR.csproj.CoreCompileInputs.cache
+C:\Users\Gowtham\source\repos\WebAPITAR\WebAPITAR\obj\Debug\netcoreapp2.0\WebAPITAR.AssemblyInfoInputs.cache
+C:\Users\Gowtham\source\repos\WebAPITAR\WebAPITAR\obj\Debug\netcoreapp2.0\WebAPITAR.AssemblyInfo.cs
+C:\Users\Gowtham\source\repos\WebAPITAR\WebAPITAR\obj\Debug\netcoreapp2.0\WebAPITAR.dll
+C:\Users\Gowtham\source\repos\WebAPITAR\WebAPITAR\obj\Debug\netcoreapp2.0\WebAPITAR.pdb

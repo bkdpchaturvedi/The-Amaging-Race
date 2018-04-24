@@ -3,15 +3,17 @@
 <script src="~/Scripts/Custom/PitStop.js"></script>
 
 <a href="#" class="btn btn-success" onclick="AddEvent()">Create</a><br />
-<form id="searchForm">
+
+
     <div class="input-group">
         <input type="text" placeholder="search" id="SearchString" /> &nbsp;
         <a href="#" id="btnSearch" class="btn btn-success">Go</a>
     </div>
-</form>
+
 
 @if (Model.Count() > 0)
 {
+
 
     foreach (var v in Model)
     {

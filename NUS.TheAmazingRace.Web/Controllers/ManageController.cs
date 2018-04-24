@@ -1,11 +1,16 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using NUS.TheAmagingRace.BAL;
+using NUS.TheAmagingRace.BusinessModels;
+using NUS.TheAmagingRace.DAL;
 using NUS.TheAmazingRace.Web.Models;
 
 namespace NUS.TheAmazingRace.Web.Controllers
@@ -15,6 +20,9 @@ namespace NUS.TheAmazingRace.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
+       
+        private TARDBContext context = new TARDBContext();
 
         public ManageController()
         {
@@ -320,6 +328,51 @@ namespace NUS.TheAmazingRace.Web.Controllers
             }
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
+        }
+
+        public ActionResult ChangeProfilePic()
+        {
+            TARUser model = UserManager.FindById(User.Identity.GetUserId());
+           
+            ChangeProfileViewModel c = new ChangeProfileViewModel {Name= model.DisplayName};
+            return PartialView("_ChangeProfilePic",c);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ChangeProfilePicAsync(ChangeProfileViewModel model)
+        {
+            TARUser currentUser = UserManager.FindById(User.Identity.GetUserId());
+            if (ModelState.IsValid)
+            {
+                
+                 
+                if (model.ImageFile == null)
+                {
+                    model.ImagePath = currentUser.ImagePath;
+                }
+                else
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
+                    string extension = Path.GetExtension(model.ImageFile.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    model.ImagePath = "~/Content/Images/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Content/Images/"), fileName);
+                    model.ImageFile.SaveAs(fileName);
+                }
+
+                currentUser.ImagePath = model.ImagePath;
+                currentUser.DisplayName = model.Name;
+
+                var manager = new UserManager<TARUser>
+         (new UserStore<TARUser>
+             (new TARDBContext()));
+
+                context.Entry(currentUser).State = System.Data.Entity.EntityState.Modified;
+                await context.SaveChangesAsync();
+               
+                return View("Index");
+            }
+            return View("Index");
         }
 
         protected override void Dispose(bool disposing)

@@ -21,6 +21,9 @@ namespace NUS.TheAmazingRace.Web.Controllers
         public ActionResult Index(int EventID=0)
         {
             Session["eventId"] = EventID;
+            Event currentEvent = eventBAL.GetSelectedEvent(EventID);
+            ViewBag.pitStop = currentEvent.TotalPitStops;
+            ViewBag.team = currentEvent.TotalTeams;
             return PartialView("_Index", pitStopBAL.getPitStopOfEvent(EventID));
         }
 

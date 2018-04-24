@@ -370,9 +370,9 @@ namespace NUS.TheAmazingRace.Web.Controllers
                 context.Entry(currentUser).State = System.Data.Entity.EntityState.Modified;
                 await context.SaveChangesAsync();
                
-                return View("Index");
+                return RedirectToAction("Index");
             }
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

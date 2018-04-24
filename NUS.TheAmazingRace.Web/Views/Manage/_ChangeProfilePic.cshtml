@@ -2,7 +2,8 @@
 
 
 
-<form id="ProfForm">
+@using (Html.BeginForm("ChangeProfilePicAsync", "Manage", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form"}))
+{
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -24,44 +25,44 @@
 
         </div>
 
-        
+
 
 
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <a href="#" id="btnsubmit" class="btn btn-success">Update</a>
+                <input type="submit" class="btn btn-success" value="Update" />
             </div>
         </div>
-    </div>
-</form>
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-
+        </div>
 }
-<script>
-    $(document).ready(function () {
-        $("#btnsubmit").click(function () {
-            $("#loaderDiv").show();
-            var formData = $("#ProfForm").serialize();
-            $.ajax({
-                type: "POST",
-                url: "/Manage/ChangeProfilePicAsync",
-                data: formData,
-                success: function () {
-                   
-                    $("#ModalChange").modal("hide");
-                    window.location.reload();
-                   
 
-                }
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+
+    }
+    @*<script>
+        $(document).ready(function () {
+            $("#btnsubmit").click(function () {
+                $("#loaderDiv").show();
+                var formData = $("#ProfForm").serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "/Manage/ChangeProfilePicAsync",
+                    data: formData,
+                    success: function () {
+
+                        $("#ModalChange").modal("hide");
+                        window.location.reload();
+
+
+                    }
+                })
+
             })
-
         })
-    })
-</script>
+    </script>*@

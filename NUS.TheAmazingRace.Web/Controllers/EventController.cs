@@ -57,10 +57,10 @@ namespace NUS.TheAmazingRace.Web.Controllers
             return PartialView("_CreateEvent");
         }
 
-        public JsonResult DeleteEvent(int eventId)
+        public ActionResult DeleteEvent(int eventId)
         {
-            bool result = eventBAL.DeleteEventfromList(eventId);
-            return Json(result, JsonRequestBehavior.AllowGet);
+            
+            return PartialView("_EventsList", eventBAL.DeleteEventfromList(eventId));
         }
 
         public ActionResult EventDetails(int eventId)

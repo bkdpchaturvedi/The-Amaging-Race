@@ -71,14 +71,14 @@ namespace NUS.TheAmagingRace.BAL
         }
 
 
-        public bool DeleteEventfromList(int eventId)
+        public List<Event> DeleteEventfromList(int eventId)
         {
-            bool result = false;
+           
             var events = db.Events.Find(eventId);
             db.Events.Remove(events);
             db.SaveChanges();
-            result = true;
-            return result;
+           
+            return GetEventList();
         }
 
         public List<Event> SearchEvent(string searchString)

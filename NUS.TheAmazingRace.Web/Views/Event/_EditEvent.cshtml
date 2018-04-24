@@ -97,7 +97,10 @@
                 success: function (data) {
                     $("#loaderDiv").hide(); 
                     $("#ModalEdit").modal("hide");
+                    $("#refresh").empty();
+                    $("#refresh").html("<div class='NorecordFound'><br /> <p> Select an event to view Pit stops</p> </div>");
                     $("#LoadEvent").html(data);
+                    
                     
                 }
             })

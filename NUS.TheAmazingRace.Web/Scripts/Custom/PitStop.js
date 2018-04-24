@@ -153,8 +153,8 @@ var EditPitStop = function (pitStopId) {
 var VewPitstop = function (pitStopId) {
     var url = "/PitStop/PitStopDetails?pitStopId=" + pitStopId;
 
-    $("#ModalBodyShow").load(url, function () {
-        $("#ModalShow").modal("show");
+    $("#ModalBodyviewPit").load(url, function () {
+        $("#ModalviewPit").modal("show");
     });
 };
 var UpdatePitStop = function () {

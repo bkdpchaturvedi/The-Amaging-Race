@@ -5,16 +5,19 @@
 };
 
 var DeleteEvent = function () {
-    $("#loaderDiv").show();
+   
     var eventId = $("#hiddenEventId").val();
     $.ajax({
         type: "POST",
         url: '/Event/DeleteEvent',
         data: { EventId: eventId },
         success: function (result) {
-            $("#loaderDiv").hide();
+         
             $("#myModal").modal('hide');
-            $("#EventCard_" + eventId).remove();
+            $("#LoadEvent").html(result); 
+            $("#refresh").empty();
+            $("#refresh").html("<div class='NorecordFound'><br /> <p> Select an event to view Pit stops</p> </div>");
+            
         }
 
     });

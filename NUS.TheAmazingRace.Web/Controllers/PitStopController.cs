@@ -65,5 +65,11 @@ namespace NUS.TheAmazingRace.Web.Controllers
             List<PitStop> pitStop = pitStopBAL.DeletePitStopfromList(pitStopId, eventID);
             return PartialView("_Index", pitStop);
         }
+        public ActionResult PitstopDetails(int pitStopId)
+        {
+
+            return PartialView("_PitStopDetails",pitStopBAL.GetSelectedPitStop(pitStopId));
+        }
     }
+
 }

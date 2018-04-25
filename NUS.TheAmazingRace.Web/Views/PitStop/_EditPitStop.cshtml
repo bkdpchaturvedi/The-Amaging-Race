@@ -1,5 +1,8 @@
 ﻿@model NUS.TheAmagingRace.DAL.PitStop
 
+@{
+    IEnumerable<SelectListItem> staffList = ViewBag.StaffList;
+}
 @Scripts.Render("~/bundles/jqueryval")
 <script src="~/Scripts/Custom/PitStop.js"></script>
 
@@ -34,6 +37,12 @@
                         @Html.ValidationMessageFor(model => model.SequenceNumber, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Staff, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Staff.UserName, staffList)
+                    </div>
+                </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -50,11 +59,11 @@
                 </div>
             </div>
         </div>
-                <div class="col-lg-6">
-                    <div id="mapEdit" style="width:400px;height:400px;background:yellow"></div>
-                </div>
-            
+        <div class="col-lg-6">
+            <div id="mapEdit" style="width:400px;height:400px;background:yellow"></div>
         </div>
+
+    </div>
 </form>
 
 

@@ -1,6 +1,8 @@
 ﻿using NUS.TheAmagingRace.DAL;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +18,9 @@ namespace NUS.TheAmagingRace.BAL
             return db.PitStops.ToList(); ;
         }
 
-        public List<PitStop> CreatePitStopList(PitStop pitStop, string currentUser, int eventId)
+        public List<PitStop> CreatePitStopList(PitStop pitStop, string currentUser, int eventId,string userId)
         {
+
             
             if (pitStop.PitStopID > 0)
             {
@@ -30,6 +33,15 @@ namespace NUS.TheAmagingRace.BAL
                 editPitStops.LastModifiedBy = currentUser;
                 Event currentEvent = db.Events.SingleOrDefault(x => x.EventID == eventId);
                 pitStop.Event = currentEvent;
+
+                pitStop.Staff.Id = userId;
+                TARUser staffInfo = db.Users.FirstOrDefault(d => d.Id == userId);
+                pitStop.Staff = staffInfo;
+
+                editPitStops.Staff.Id = pitStop.Staff.Id;
+                editPitStops.Staff = pitStop.Staff;
+                editPitStops.Event = pitStop.Event;
+
                 editPitStops.LastModifiedAt = DateTime.Now;
                 db.SaveChanges();
 
@@ -41,11 +53,32 @@ namespace NUS.TheAmagingRace.BAL
             else
             {
                 pitStop.CreatedBy = currentUser;
+                pitStop.Staff.Id = userId;
                 Event currentEvent = db.Events.SingleOrDefault(x => x.EventID == eventId);
+                TARUser staffInfo = db.Users.FirstOrDefault(d => d.Id == userId);
+                pitStop.Staff = staffInfo;
                 pitStop.Event = currentEvent;
                 db.PitStops.Add(pitStop);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException dbEx)
+                {
 
-                db.SaveChanges();
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            Trace.TraceInformation("Property: {0} Error: {1}",
+                                                    validationError.PropertyName,
+                                                    validationError.ErrorMessage);
+                        }
+                    }
+                }
+                   
+               
+
             }
 
             return getPitStopOfEvent(eventId);

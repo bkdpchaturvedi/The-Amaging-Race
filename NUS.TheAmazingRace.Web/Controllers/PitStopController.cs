@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Newtonsoft.Json.Linq;
 using NUS.TheAmagingRace.BAL;
 using NUS.TheAmagingRace.DAL;
@@ -16,6 +17,7 @@ namespace NUS.TheAmazingRace.Web.Controllers
     {
         private PitStopBAL pitStopBAL = new PitStopBAL();
         private EventBAL eventBAL = new EventBAL();
+        private TARDBContext db = new TARDBContext();
         // GET: PitStop
 
         public ActionResult Index(int EventID=0)
@@ -41,21 +43,60 @@ namespace NUS.TheAmazingRace.Web.Controllers
 
         public ActionResult CreatePitStop()
         {
-           return PartialView("_CreatePitStop");
+            TARDBContext userList = new TARDBContext();
+            List<SelectListItem> ListOfUsers = new List<SelectListItem>();
+
+            //UserManager<TARUser> UserManager = new UserManager<TARUser>(new UserStore<TARUser>(new TARDBContext()));
+            var getRole = (from r in db.Roles where r.Name.Contains("Staff") select r).FirstOrDefault();
+            var getStaffUsers = db.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(getRole.Id)).ToList();
+            
+            foreach (var item in getStaffUsers)
+            {
+               
+              
+                ListOfUsers.Add(new SelectListItem() { Text = item.UserName, Value = item.UserName });
+
+
+            }
+
+            ViewBag.StaffList = ListOfUsers;
+            
+            return PartialView("_CreatePitStop");
         }
 
         public ActionResult EditPitStops(int pitStopId)
         {
+
+            TARDBContext userList = new TARDBContext();
+            List<SelectListItem> ListOfUsers = new List<SelectListItem>();
+            var getRole = (from r in db.Roles where r.Name.Contains("Staff") select r).FirstOrDefault();
+            var getStaffUsers = db.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(getRole.Id)).ToList();
+
+            foreach (var item in getStaffUsers)
+            {
+
+
+                ListOfUsers.Add(new SelectListItem() { Text = item.UserName, Value = item.UserName });
+
+
+            }
+
+            ViewBag.StaffList = ListOfUsers;
             Session["pitStopId"] = pitStopId;
             return PartialView("_EditPitStop", pitStopBAL.GetSelectedPitStop(pitStopId));
         }
 
         [HttpPost]
-        public ActionResult AddPitStop(PitStop pitStop)
+        public async System.Threading.Tasks.Task<ActionResult> AddPitStop(PitStop pitStop)
         {
+            UserManager<TARUser> UserManager = new UserManager<TARUser>(new UserStore<TARUser>(new TARDBContext()));
+
             int eventId = Convert.ToInt32(Session["eventId"]);
             String currentUser = User.Identity.GetUserName();
-            List<PitStop> pitStops = pitStopBAL.CreatePitStopList(pitStop, currentUser, eventId);
+            var user = await UserManager.FindByNameAsync(pitStop.Staff.UserName);
+            var userId = user.Id;
+           
+            List<PitStop> pitStops = pitStopBAL.CreatePitStopList(pitStop, currentUser, eventId,userId);
             return PartialView("_Index", pitStops);
         }
 

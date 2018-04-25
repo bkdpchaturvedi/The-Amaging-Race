@@ -52,7 +52,7 @@ var OnSuccess =  function (data) {
 
 var ShowPitstop = function (eventId) {
     $("#loaderDiv").show();
-    debugger;
+    
 
     var url = "/PitStop/Index";
     $("#hiddenEventId").val(eventId);

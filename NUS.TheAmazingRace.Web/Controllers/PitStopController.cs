@@ -46,7 +46,6 @@ namespace NUS.TheAmazingRace.Web.Controllers
             TARDBContext userList = new TARDBContext();
             List<SelectListItem> ListOfUsers = new List<SelectListItem>();
 
-            //UserManager<TARUser> UserManager = new UserManager<TARUser>(new UserStore<TARUser>(new TARDBContext()));
             var getRole = (from r in db.Roles where r.Name.Contains("Staff") select r).FirstOrDefault();
             var getStaffUsers = db.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(getRole.Id)).ToList();
             

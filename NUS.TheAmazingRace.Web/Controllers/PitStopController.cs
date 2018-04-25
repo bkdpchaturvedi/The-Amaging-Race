@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace NUS.TheAmazingRace.Web.Controllers
 {
@@ -89,13 +90,27 @@ namespace NUS.TheAmazingRace.Web.Controllers
         public async System.Threading.Tasks.Task<ActionResult> AddPitStop(PitStop pitStop)
         {
             UserManager<TARUser> UserManager = new UserManager<TARUser>(new UserStore<TARUser>(new TARDBContext()));
-
+            List<PitStop> pitStops = new List<PitStop>();
             int eventId = Convert.ToInt32(Session["eventId"]);
             String currentUser = User.Identity.GetUserName();
             var user = await UserManager.FindByNameAsync(pitStop.Staff.UserName);
             var userId = user.Id;
-           
-            List<PitStop> pitStops = pitStopBAL.CreatePitStopList(pitStop, currentUser, eventId,userId);
+            db.PitStops.Add(pitStop);
+            var seq = db.PitStops.Where(u => u.SequenceNumber == pitStop.SequenceNumber).FirstOrDefault();
+            if (seq != null)
+            {
+                ModelState.AddModelError("CustomError", "Sequence Number already exists");
+                
+
+                Response.Write("<script>alert('Sequence Number should be Unique')</script>");
+
+            }
+            else
+            {
+                pitStops = pitStopBAL.CreatePitStopList(pitStop, currentUser, eventId, userId);
+                return PartialView("_Index", pitStops);
+            }
+
             return PartialView("_Index", pitStops);
         }
 

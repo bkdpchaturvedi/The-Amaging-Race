@@ -15,7 +15,7 @@ namespace NUS.TheAmagingRace.BAL
         private PitStop pitStop = new PitStop();
         public List<PitStop> GetPitStopList()
         {
-            return db.PitStops.ToList(); ;
+            return db.PitStops.OrderBy(seq=>seq.SequenceNumber).ToList(); ;
         }
 
         public List<PitStop> CreatePitStopList(PitStop pitStop, string currentUser, int eventId,string userId)
@@ -56,26 +56,7 @@ namespace NUS.TheAmagingRace.BAL
                 pitStop.Staff = staffInfo;
                 pitStop.Event = currentEvent;
                 db.PitStops.Add(pitStop);
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbEntityValidationException dbEx)
-                {
-
-                    foreach (var validationErrors in dbEx.EntityValidationErrors)
-                    {
-                        foreach (var validationError in validationErrors.ValidationErrors)
-                        {
-                            Trace.TraceInformation("Property: {0} Error: {1}",
-                                                    validationError.PropertyName,
-                                                    validationError.ErrorMessage);
-                        }
-                    }
-                }
-                   
-               
-
+                db.SaveChanges();
             }
 
             return getPitStopOfEvent(eventId);
@@ -87,7 +68,7 @@ namespace NUS.TheAmagingRace.BAL
                          select s;
             pitstops = pitstops.Where(s => s.Event.EventID == eventId);
             
-            return pitstops.ToList();
+            return pitstops.OrderBy(seq => seq.SequenceNumber).ToList();
         }
 
         public List<PitStop> getPitStopOfPitStopId(int pitStopId)
@@ -96,7 +77,7 @@ namespace NUS.TheAmagingRace.BAL
                            select s;
             pitstops = pitstops.Where(s => s.PitStopID == pitStopId);
 
-            return pitstops.ToList();
+            return pitstops.OrderBy(seq => seq.SequenceNumber).ToList();
         }
 
         public PitStop GetValuesToEdit(int pitStopId)

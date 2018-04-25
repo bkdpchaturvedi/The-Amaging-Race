@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NUS.TheAmagingRace.DAL
 {
@@ -6,7 +7,7 @@ namespace NUS.TheAmagingRace.DAL
     {
         [Key]
         public int PitStopID { get; set; }
-
+        [Required(ErrorMessage = "Pitstop Name is mandatory")]
         public string PitStopName { get; set; }
 
        
@@ -14,13 +15,15 @@ namespace NUS.TheAmagingRace.DAL
         public string Latitude { get; set; }
 
         public string Longitude { get; set; }
-
+        [Required(ErrorMessage = "Sequence Number is mandatory")]
+        [Index(IsUnique = true)]
+        
         public int SequenceNumber { get; set; }
 
         public string Address { get; set; }
 
         public virtual Event Event { get; set; }
-
+       
         public virtual TARUser Staff { get; set; }
     }
 }

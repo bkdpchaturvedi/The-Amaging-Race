@@ -15,7 +15,7 @@ namespace NUS.TheAmagingRace.BAL
 
         public List<Event> GetEventList()
         {
-            return db.Events.ToList(); ;
+            return db.Events.OrderBy(o => o.StartDate).ToList(); ;
         }
 
         public List<Event> EditEventList(Event eventModel,string currentUser)
@@ -44,7 +44,7 @@ namespace NUS.TheAmagingRace.BAL
                 db.SaveChanges();
             }
 
-            return db.Events.ToList(); ;
+            return db.Events.OrderBy(o => o.StartDate).ToList(); ;
         }
 
         public Event GetEditingValues(int eventId)
@@ -89,7 +89,7 @@ namespace NUS.TheAmagingRace.BAL
             {
                 events = events.Where(s => s.EventName.Contains(searchString));
             }
-            return events.ToList();
+            return events.OrderBy(o => o.StartDate).ToList();
         }
 
         public List<Event> CurrentEvent()
@@ -100,7 +100,7 @@ namespace NUS.TheAmagingRace.BAL
             
            events = events.Where(s => s.StartDate<=DateTime.Now && s.EndDate>=DateTime.Now);
             
-            return events.ToList();
+            return events.OrderBy(o => o.StartDate).ToList();
         }
 
         public List<Event> UpcomingEvents()
@@ -111,7 +111,7 @@ namespace NUS.TheAmagingRace.BAL
 
             events = events.Where(s => s.StartDate > DateTime.Now);
 
-            return events.ToList();
+            return events.OrderBy(o=>o.StartDate).ToList();
         }
 
 

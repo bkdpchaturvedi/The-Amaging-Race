@@ -34,14 +34,11 @@ namespace NUS.TheAmagingRace.BAL
                 Event currentEvent = db.Events.SingleOrDefault(x => x.EventID == eventId);
                 pitStop.Event = currentEvent;
 
-                pitStop.Staff.Id = userId;
+
                 TARUser staffInfo = db.Users.FirstOrDefault(d => d.Id == userId);
-                pitStop.Staff = staffInfo;
+                editPitStops.Staff = staffInfo;
 
-                editPitStops.Staff.Id = pitStop.Staff.Id;
-                editPitStops.Staff = pitStop.Staff;
-                editPitStops.Event = pitStop.Event;
-
+               
                 editPitStops.LastModifiedAt = DateTime.Now;
                 db.SaveChanges();
 

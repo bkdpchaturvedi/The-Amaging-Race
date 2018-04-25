@@ -9,7 +9,7 @@ namespace NUS.TheAmagingRace.DAL
 
         public string PitStopName { get; set; }
 
-        public string StaffId { get; set; }
+       
 
         public string Latitude { get; set; }
 
@@ -20,5 +20,7 @@ namespace NUS.TheAmagingRace.DAL
         public string Address { get; set; }
 
         public virtual Event Event { get; set; }
+
+        public virtual TARUser Staff { get; set; }
     }
 }

@@ -153,7 +153,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.324989", lng = "103.741163", time = "2.5", distance = "1.68", pitstopName = " Jurong Bird Park" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -168,7 +168,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.321725", lng = "103.713192", time = "3", distance = "2", pitstopName = " Jurong Bird Park" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -183,7 +183,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.321532", lng = "103.707385", time = "2.5", distance = "1", pitstopName = " Jurong Bird Park" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -198,8 +198,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.323175", lng = "103.713809", time = "3.1", distance = "2.75", pitstopName = " Sembawang Country Club" };
-
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -216,8 +215,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.321888", lng = "103.755007", time = "2.2", distance = "3.1", pitstopName = " Sembawang Country Club" };
-
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -233,8 +231,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.327592", lng = "103.764944", time = "2.78", distance = "2.75", pitstopName = " Sembawang Country Club" };
-
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -250,7 +247,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.338489", lng = "103.778504", time = "3.1", distance = "2.75", pitstopName = " Sembawang Country Club" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -265,7 +262,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.354064", lng = "103.785666", time = "2.2", distance = "3.1", pitstopName = " Sembawang Country Club" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -280,7 +277,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.37438", lng = "103.776737", time = "3.1", distance = "2.75", pitstopName = " Sembawang Country Club" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -295,7 +292,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.391326", lng = "103.773389", time = "3.1", distance = "2", pitstopName = " Sembawang Country Club" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -310,7 +307,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.409602", lng = "103.772873", time = "3.1", distance = "2", pitstopName = " Sembawang Country Club" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -325,7 +322,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.41578", lng = "103.802656", time = "3.1", distance = "2.75", pitstopName = " Sembawang Country Club" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -340,7 +337,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.413607", lng = "103.815091", time = "3.1", distance = "2", pitstopName = " Sembawang Country Club" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -355,7 +352,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.411658", lng = "103.805082", time = "3.5", distance = "2.72", pitstopName = " Changi General Hospital" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -370,7 +367,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.402176", lng = "103.812463", time = "4", distance = "2.75", pitstopName = " Changi General Hospital" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -384,8 +381,8 @@ namespace WebAPITAR.Controller
                 Location locationT1 = new Location { lat = "1.393596", lng = "103.823277", time = "3.5", distance = "2.72", pitstopName = " Changi General Hospital" };
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
-            
-                Location locationT2 = new Location { lat = "1.393467", lng = "103.825251", time = "3.5", distance = "2.72", pitstopName = " Changi General Hospital" };
+
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -400,7 +397,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.398659", lng = "103.853532", time = "4", distance = "2.75", pitstopName = " Changi General Hospital" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -415,7 +412,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.402291", lng = "103.881041", time = "3.5", distance = "2.72", pitstopName = " Changi General Hospital" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -430,7 +427,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.390077", lng = "103.911482", time = "4", distance = "2.75", pitstopName = " Changi General Hospital" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -445,7 +442,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.373281", lng = "103.937835", time = "3.5", distance = "2.72", pitstopName = " Changi General Hospital" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -460,7 +457,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.359366", lng = "103.962109", time = "4", distance = "2.75", pitstopName = " Changi General Hospital" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -475,7 +472,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.33823", lng = "103.960483", time = "4", distance = "2.75", pitstopName = " Changi General Hospital" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 
@@ -490,7 +487,7 @@ namespace WebAPITAR.Controller
                 location1.Add(locationT1);
                 team1 = new Team { TeamID = 1, Location = location1 };
 
-                Location locationT2 = new Location { lat = "1.339323", lng = "103.950177", time = "3.4", distance = "3", pitstopName = " Changi General Hospital" };
+                Location locationT2 = new Location { lat = "1.321939", lng = "103.750571", time = "2.9", distance = "2", pitstopName = " Jurong Bird Park" };
                 location2.Add(locationT2);
                 team2 = new Team { TeamID = 2, Location = location2 };
 

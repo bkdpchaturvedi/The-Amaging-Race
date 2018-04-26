@@ -72,9 +72,10 @@
     </div>
 
     <div class="form-group">
-        <div class="col-md-offset-1">
+        @Html.Label("Preview", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
 
-            <img id="blah" src="#" alt="your image" />
+            <img id="blah" src="~/Content/Images/Empty_pic.png" alt="your image" width="60" height="60"/>
         </div>
 
     </div>

@@ -22,10 +22,11 @@
             <div class="card-content">
                 <div class="card-header">
                     <div class="card-heading">
-                        <div style="float:right">
-                            <a href="#" class="glyphicon glyphicon-eye-open" onclick="ShowEvent(@v.EventID)"></a>&nbsp;
-                        </div>
-                        <h5 align="center"><strong>@v.EventName</strong> </h5>
+
+                        <h5 style="padding-left:80px">
+                            <img class="img-circle" src="@Url.Content(v.ImagePath)" alt="Event Image" width="45" height="45">
+                            <strong>@v.EventName</strong>
+                            </h5>
                     </div>
 
                 </div>

@@ -107,6 +107,7 @@ var allPitStops = function () {
             latlngPit = new google.maps.LatLng(data[i].Latitude, data[i].Longitude);
             if (data[i + 1]) {
                 latlngNext = new google.maps.LatLng(data[i+1].Latitude, data[i+1].Longitude);
+                calcRoute(latlngPit, latlngNext, map);
             }
             address = data[i].Address;
             name =i +1 + ". " + data[i].PitStopName;
@@ -116,7 +117,6 @@ var allPitStops = function () {
                  label: { text: name, color: "green" },
                 map: map
             });
-            calcRoute(latlngPit, latlngNext, map);
             //marker.setMap(latlngPit);
         }
         //var map = new google.maps.Map(document.getElementById("mainMap"), mapOptions);
@@ -142,7 +142,7 @@ var allPitStops = function () {
     function calcRoute(latlngPit, latlngNext, map) {
 
         var directionsService = new google.maps.DirectionsService();
-        var directionsDisplay = new google.maps.DirectionsRenderer({ map: map, suppressMarkers: true });
+        var directionsDisplay = new google.maps.DirectionsRenderer({ map: map, suppressMarkers: true, preserveViewport: true});
         
         var start = latlngPit;
         var end = latlngNext;

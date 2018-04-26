@@ -1,66 +1,43 @@
-﻿@model IEnumerable<NUS.TheAmagingRace.DAL.Event>
+﻿@model IEnumerable<NUS.TheAmagingRace.DAL.Team>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table" id="leaderBoard">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.EventName)
+            @Html.DisplayNameFor(model => model.TeamName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EventDescription)
+            @Html.DisplayNameFor(model => model.Distance)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EventCountry)
+            @Html.DisplayNameFor(model => model.Time)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EventCity)
+            @Html.DisplayNameFor(model => model.NextPitStop)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalPitStops)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalTeams)
-        </th>
-        
-        <th></th>
+
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.EventName)
+            @Html.DisplayFor(modelItem => item.TeamName)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EventDescription)
+
+        <td id="@("distance_" + item.TeamID)">
+            @Html.DisplayFor(modelItem => item.Distance)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EventCountry)
+        <td id="@("time_" + item.TeamID)">
+            @Html.DisplayFor(modelItem => item.Time)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EventCity)
+        <td id="@("nextPit_" + item.TeamID)">
+            @Html.DisplayFor(modelItem => item.NextPitStop)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalPitStops)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalTeams)
-        </td>
-        
+
     </tr>
-}
+    }
 
 </table>

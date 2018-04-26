@@ -17,6 +17,7 @@ namespace NUS.TheAmagingRace.BAL
     public class TeamBAL
     {
         private readonly UOW _unitOfWork;
+        private TARDBContext db = new TARDBContext();
         public TeamBAL()
         {
             _unitOfWork = new UOW();
@@ -31,9 +32,18 @@ namespace NUS.TheAmagingRace.BAL
             // Event @event=  _unitOfWork.EventRepository.GetByID(EventID);
             
            Event e= _unitOfWork.EventRepository.GetWithInclude(m=>m.EventID.Equals(EventID), "Teams","PitStops").FirstOrDefault();
-            Team t = _unitOfWork.TeamRepository.GetWithInclude(m=>true, "Event","Members").FirstOrDefault();
+           Team t = _unitOfWork.TeamRepository.GetWithInclude(m=>true, "Event","Members").FirstOrDefault();
 
             return Mapper.Map<List<Team>, List<TeamViewModel>>(e.Teams.ToList()).ToList();
+        }
+
+        public List<Team> GetTeamByEvent(int EventId)
+        {
+            var teams = from s in db.Teams
+                           select s;
+            teams = teams.Where(s => s.Event.EventID == EventId);
+
+            return teams.ToList();
         }
 
         public EventViewModel GetEventById(int EventID)
@@ -57,5 +67,23 @@ namespace NUS.TheAmagingRace.BAL
                 Scope.Complete();
             }
         }
+
+        public void updateTeamLocation(List<TeamLocation> teamLocations, int EventID)
+        {
+            for(int i=0; i<teamLocations.Count; i++)
+            {
+                int teamId = teamLocations[i].TeamID;
+                Team editTeam = db.Teams.SingleOrDefault(x => x.Event.EventID == EventID && x.TeamID == teamId);
+                editTeam.Distance = teamLocations[i].Location[0].distance;
+                editTeam.Time = teamLocations[i].Location[0].time;
+                //editTeam.Position = team.Position;
+                editTeam.NextPitStop = teamLocations[i].Location[0].pitstopName;
+                editTeam.Latitude = teamLocations[i].Location[0].lat;
+                editTeam.Longitude = teamLocations[i].Location[0].lng;
+                db.SaveChanges();
+            }
+
+        }
+
     }
 }

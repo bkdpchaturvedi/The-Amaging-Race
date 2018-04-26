@@ -3,6 +3,17 @@
     ViewBag.Title = "Register";
 }
 
+<style>
+    input[type="file"] {
+        display: none;
+    }
+    .custom-file-upload {
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+    }
+</style>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -65,17 +76,15 @@
     <div class="form-group">
         @Html.LabelFor(m => m.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <input type="file" name="ImageFile" id="imgInp" />
+            <input type="file" />
 
-        </div>
 
-    </div>
+            <label class="custom-file-upload">
 
-    <div class="form-group">
-        @Html.Label("Preview", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-
-            <img id="blah" src="~/Content/Images/Empty_pic.png" alt="your image" width="60" height="60"/>
+                <input type="file" name="ImageFile" id="imgInp" />
+                <img id="blah" src="~/Content/Images/Empty_pic.png" alt="your image" width="60" height="60" />
+            </label>
+            click on the image to upload 
         </div>
 
     </div>
@@ -83,7 +92,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
+            <input type="submit" class="btn btn-success" value="Register" />
         </div>
     </div>
 }

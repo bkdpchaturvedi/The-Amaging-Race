@@ -1,5 +1,16 @@
 ﻿@model NUS.TheAmagingRace.DAL.Event
 
+<style>
+    input[type="file"] {
+        display: none;
+    }
+
+    .custom-file-upload {
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+    }
+</style>
 
 
 <form id="editForm">
@@ -72,7 +83,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" name="ImageFile" />
+                    <label class="custom-file-upload">
+                        <input type="file" name="ImageFile" id="imgEditEvent" />
+                        <img id="eventEditImageId" src="@Url.Content(Model.ImagePath)" alt="your image" width="60" height="60" />
+                    </label>
+                    click on the image to upload
+                </div>
 
             </div>
 
@@ -117,4 +133,23 @@
 
         })
     })
+</script>
+<script>
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#eventEditImageId').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#imgEditEvent").change(function () {
+        readURL(this);
+    });
+
 </script>

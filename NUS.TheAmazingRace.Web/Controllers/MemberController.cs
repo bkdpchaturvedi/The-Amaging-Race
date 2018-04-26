@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace NUS.TheAmazingRace.Web.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class MemberController : Controller
     {
         IMemberBAL memberBAL = null;
@@ -22,14 +22,17 @@ namespace NUS.TheAmazingRace.Web.Controllers
         {
             this.memberBAL = memberBAL;
         }
-        // GET: Member
+
+
+        /*<summary>
+		 This method is used to Member details
+         GET: Member
+        </summary>*/
+
         public ActionResult Index()
         {
-            //TODO
-            //Get all Administrators
-            //Get All Members
-            //Get All Staff
-           
+
+
             return View();
         }
 
@@ -39,7 +42,11 @@ namespace NUS.TheAmazingRace.Web.Controllers
             return View();
         }
 
-        // GET: Member/Create
+        /*<summary>
+		 This method is used to create a member
+         GET: Member
+        </summary>*/
+
         public ActionResult Create()
         {
             return View();
@@ -51,8 +58,6 @@ namespace NUS.TheAmazingRace.Web.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-
                 return RedirectToAction("Index");
             }
             catch
@@ -73,7 +78,7 @@ namespace NUS.TheAmazingRace.Web.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+
 
                 return RedirectToAction("Index");
             }
@@ -95,8 +100,6 @@ namespace NUS.TheAmazingRace.Web.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-
                 return RedirectToAction("Index");
             }
             catch
@@ -107,7 +110,7 @@ namespace NUS.TheAmazingRace.Web.Controllers
         [HttpGet]
         public ActionResult LoadAdministrators()
         {
-           var Administrators= memberBAL.GetAllTARAdministrators();
+            var Administrators = memberBAL.GetAllTARAdministrators();
             return PartialView(Administrators);
         }
 

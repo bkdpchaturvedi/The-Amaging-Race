@@ -15,7 +15,7 @@
 
 <form id="editForm">
     @Html.AntiForgeryToken()
-   @Html.HiddenFor(model => model.EventID, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.HiddenFor(model => model.EventID, htmlAttributes: new { @class = "control-label col-md-2" })
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -83,22 +83,22 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                    <label class="custom-file-upload">
-                        <input type="file" name="ImageFile" id="imgEditEvent" />
-                        <img id="eventEditImageId" src="@Url.Content(Model.ImagePath)" alt="your image" width="60" height="60" />
-                    </label>
-                    click on the image to upload
-                </div>
-
+                <label class="custom-file-upload">
+                    <input type="file" name="ImageFile" id="imgEditEvent" />
+                    <img id="eventEditImageId" src="@Url.Content(Model.ImagePath)" alt="your image" width="60" height="60" />
+                </label>
+                click on the image to upload
             </div>
 
+        </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <a href="#" id="btnsubmit" class="btn btn-success">Update</a>
-                </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <a href="#" id="btnsubmit" class="btn btn-success">Update</a>
             </div>
         </div>
+    </div>
 </form>
 
 <div>
@@ -121,13 +121,13 @@
                 processData: false,
                 contentType: false,
                 success: function (data) {
-                    $("#loaderDiv").hide(); 
+                    $("#loaderDiv").hide();
                     $("#ModalEdit").modal("hide");
                     $("#refresh").empty();
                     $("#refresh").html("<div class='NorecordFound'><br /> <p> Select an event to view Pit stops</p> </div>");
                     $("#LoadEvent").html(data);
-                    
-                    
+
+
                 }
             })
 

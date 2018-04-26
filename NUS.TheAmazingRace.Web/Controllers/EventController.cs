@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-
+using System.IO;
 
 namespace NUS.TheAmazingRace.Web.Controllers
 {
@@ -38,7 +38,43 @@ namespace NUS.TheAmazingRace.Web.Controllers
         [HttpPost]
         public ActionResult EventsList(Event eventModel)
         {
-            string currentUser= User.Identity.GetUserName();
+            if (eventModel.EventID > 0)
+            {
+                Event selectedEvent = eventBAL.GetEditingValues(eventModel.EventID);
+                if (eventModel.ImageFile == null)
+                {
+                    eventModel.ImagePath = selectedEvent.ImagePath;
+                }
+                else
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(eventModel.ImageFile.FileName);
+                    string extension = Path.GetExtension(eventModel.ImageFile.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    eventModel.ImagePath = "~/Content/Images/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Content/Images/"), fileName);
+                    eventModel.ImageFile.SaveAs(fileName);
+                }
+
+            }
+            else
+            {
+                if (eventModel.ImageFile == null)
+                {
+                    eventModel.ImagePath = "~/Content/Images/Empty_Event_Icon.png";
+                }
+                else
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(eventModel.ImageFile.FileName);
+                    string extension = Path.GetExtension(eventModel.ImageFile.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    eventModel.ImagePath = "~/Content/Images/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Content/Images/"), fileName);
+                    eventModel.ImageFile.SaveAs(fileName);
+                }
+            }
+            
+
+            string currentUser = User.Identity.GetUserName();
             return PartialView("_EventsList", eventBAL.EditEventList(eventModel, currentUser).ToList());
         }
 

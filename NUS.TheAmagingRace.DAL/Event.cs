@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Web;
 
 namespace NUS.TheAmagingRace.DAL
 {
@@ -44,6 +46,11 @@ namespace NUS.TheAmagingRace.DAL
         [Display(Name = "Teams")]
         public int TotalTeams { get; set; }
 
+        [Display(Name = "Upload Image")]
+        public string ImagePath { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageFile { get; set; }
 
         public virtual ICollection<Team> Teams { get; set; }
 

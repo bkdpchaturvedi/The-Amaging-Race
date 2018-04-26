@@ -5,7 +5,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.EventName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -72,6 +72,15 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="ImageFile" />
+
+            </div>
+        </div>
+
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <a href="#" id="btncreate" class="btn btn-success">Add</a>
             </div>
@@ -90,11 +99,13 @@
     $(document).ready(function () {
         $("#btncreate").click(function () {
             $("#loaderDiv").show();
-            var formData = $("#addForm").serialize();
+            var formData = new FormData($("#addForm")[0]);
             $.ajax({
                 type: "POST",
                 url: "/Event/EventsList",
                 data: formData,
+                processData: false,
+                contentType: false,
                 success: function (data) {
                     $("#loaderDiv").hide();
                     $("#ModalAdd").modal("hide");
@@ -107,4 +118,5 @@
 
         })
     })
+
  </script>

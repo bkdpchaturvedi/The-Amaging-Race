@@ -2,11 +2,18 @@
 <script src="~/Scripts/Custom/EventManagement.js"></script>
 <script src="~/Scripts/Custom/PitStop.js"></script>
 
+<style>
+    
+    input#SearchString {
+       
+        padding-left:10px;
+    }
+</style>
 <a href="#" class="btn btn-success" onclick="AddEvent()">Create</a><br />
 
-
+<br />
     <div class="input-group">
-        <input type="text" placeholder="search" id="SearchString" /> &nbsp;
+        <input  type="text" style="width:170px" placeholder="search an event" id="SearchString" /> &nbsp;
         <a href="#" id="btnSearch" class="btn btn-success">Go</a>
     </div>
 
@@ -24,13 +31,20 @@
         <div class="card" id='@id.ToString()'>
             <div class="card-content">
                 <div class="card-header">
-                    <div class="card-heading">
+                   <div class="card-heading">
                         <div style="float:right">
                             <a href="#" class="glyphicon glyphicon-pencil" onclick="EditEvent(@v.EventID)"></a>&nbsp;
                             <a href="#" class="glyphicon glyphicon-eye-open" onclick="ShowEvent(@v.EventID)"></a>&nbsp;
                             <a href="#" class="glyphicon glyphicon-trash" onclick="ConfirmDelete(@v.EventID)"></a>&nbsp;
                         </div>
-                        <h5 align="center"><strong>@v.EventName</strong> </h5>
+                        
+                        <h5 style="padding-left:40px">
+                            <img class="img-circle" src="@Url.Content(v.ImagePath)" alt="Event Image" width="45" height="45">
+                            <strong>@v.EventName</strong>
+
+
+                        </h5>
+                       
                     </div>
 
                 </div>

@@ -70,11 +70,19 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <a href="#" id="btnsubmit" class="btn btn-success">Update</a>
+            @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="ImageFile" />
+
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <a href="#" id="btnsubmit" class="btn btn-success">Update</a>
+                </div>
             </div>
         </div>
-    </div>
 </form>
 
 <div>
@@ -89,11 +97,13 @@
     $(document).ready(function () {
         $("#btnsubmit").click(function () {
             $("#loaderDiv").show();
-            var formData = $("#editForm").serialize();
+            var formData = new FormData($("#editForm")[0]);
             $.ajax({
                 type: "POST",
                 url: "/Event/EventsList",
                 data: formData,
+                processData: false,
+                contentType: false,
                 success: function (data) {
                     $("#loaderDiv").hide(); 
                     $("#ModalEdit").modal("hide");

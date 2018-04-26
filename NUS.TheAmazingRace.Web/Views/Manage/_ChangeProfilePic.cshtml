@@ -45,24 +45,4 @@
         @Scripts.Render("~/bundles/jqueryval")
 
     }
-    @*<script>
-        $(document).ready(function () {
-            $("#btnsubmit").click(function () {
-                $("#loaderDiv").show();
-                var formData = $("#ProfForm").serialize();
-                $.ajax({
-                    type: "POST",
-                    url: "/Manage/ChangeProfilePicAsync",
-                    data: formData,
-                    success: function () {
-
-                        $("#ModalChange").modal("hide");
-                        window.location.reload();
-
-
-                    }
-                })
-
-            })
-        })
-    </script>*@
+    

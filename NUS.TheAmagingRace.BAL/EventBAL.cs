@@ -34,6 +34,7 @@ namespace NUS.TheAmagingRace.BAL
                 editEvents.TotalTeams = eventModel.TotalTeams;
                 editEvents.LastModifiedBy = currentUser;
                 editEvents.LastModifiedAt = DateTime.Now;
+                editEvents.ImagePath = eventModel.ImagePath;
                 db.SaveChanges();
             }
             else
@@ -50,16 +51,8 @@ namespace NUS.TheAmagingRace.BAL
         public Event GetEditingValues(int eventId)
         {
             Event editEvents = db.Events.SingleOrDefault(x => x.EventID == eventId);
-            events.EventID = editEvents.EventID;
-            events.EventName = editEvents.EventName;
-            events.EventDescription = editEvents.EventDescription;
-            events.EventCountry = editEvents.EventCountry;
-            events.EventCity = editEvents.EventCity;
-            events.StartDate = editEvents.StartDate;
-            events.EndDate = editEvents.EndDate;
-            events.TotalPitStops = editEvents.TotalPitStops;
-            events.TotalTeams = editEvents.TotalTeams;
-            return events;
+           
+            return editEvents;
 
         }
 

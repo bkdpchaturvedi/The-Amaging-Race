@@ -11,10 +11,12 @@
 
 <a href="#" class="btn btn-success" onclick="AddEvent()">Create</a><br />
 <br />
-
-<div class="input-group">
-    <input type="text" style="width:170px" placeholder="search an event" id="SearchString" /> &nbsp;
-    <a href="#" id="btnSearch" class="btn btn-success">Go</a>
+<div align="left">
+    <div class="input-group">
+        <img src="~/Content/Images/Back.png" width="30" height="30" id="searchBack" style=" cursor: pointer;" />&nbsp;
+        <input type="text" style="width:190px" placeholder="search an event" id="SearchString" />
+        <img href="#" id="btnSearch" src="~/Content/Images/search.png" width="30" height="30" style=" cursor: pointer;" />
+    </div>
 </div>
 
 @if (Model.Count() > 0)
@@ -25,11 +27,11 @@
             {
                 var id = "EventCard_" + v.EventID;
                 <div class="card" style="width:18em" id='@id.ToString()'>
-                    
+
                     <div class="card-content">
-                        
+
                         <div class="card-header">
-                        
+
                             <div class="card-heading">
                                 <div style="float:right">
                                     <a href="#" class="glyphicon glyphicon-pencil" onclick="EditEvent(@v.EventID)"></a>&nbsp;
@@ -42,22 +44,22 @@
                                 </h5>
                             </div>
                         </div>
-        
-                        <div style="height:60px"class="card-body" onclick="ShowPitstop(@v.EventID)">
+
+                        <div style="height:60px" class="card-body" onclick="ShowPitstop(@v.EventID)">
                             <div class="card-p">
                                 <i>@v.EventDescription</i><br /><br />
                                 Start Date : <i>@v.StartDate.Day-@v.StartDate.Month-@v.StartDate.Year</i><br />
                                 End Date &nbsp; : <i>@v.EndDate.Day-@v.EndDate.Month-@v.EndDate.Year</i>
                             </div>
                         </div>
-                      
+
                         <div class="card-footer">
                             <strong>Last modified by : </strong>@v.LastModifiedBy
                         </div>
                     </div>
                 </div>
             }
-            
+
             <input type="hidden" id="hiddenEventId" />
         </div>
     </div>
@@ -80,6 +82,19 @@ else
                 type: "GET",
                 url: url,
                 data: { searchString: searchval },
+                success: function (data) {
+                    $("#LoadEvent").html(data);
+                }
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $("#searchBack").click(function () {
+            var url = "/Event/EventsList";
+            $.ajax({
+                type: "GET",
+                url: url,
                 success: function (data) {
                     $("#LoadEvent").html(data);
                 }

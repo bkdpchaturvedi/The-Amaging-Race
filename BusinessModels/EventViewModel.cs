@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace NUS.TheAmagingRace.BusinessModels
 {
@@ -42,7 +44,11 @@ namespace NUS.TheAmagingRace.BusinessModels
         public string LastModifiedBy { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime LastModifiedAt { get; set; }
+        [Display(Name = "Upload Image")]
+        public string ImagePath { get; set; }
 
+        [NotMapped]
+        public HttpPostedFileBase ImageFile { get; set; }
         public virtual ICollection<TeamViewModel> Teams { get; set; }
 
         public ICollection<PitStopViewModel> PitStops { get; set; }

@@ -20,7 +20,7 @@ namespace NUS.TheAmagingRace.DAL.UnitOfWork
         private GenericRepository<PitStop> _pitstopRepository;
         private GenericRepository<Location> _locationRepository;
         private GenericRepository<Team> _teamRepository;
-        private RoleManager<IdentityRole> _roleRepository;
+        private GenericRepository<IdentityRole> _roleRepository;
         public UOW()
         {
             _context = new TARDBContext();
@@ -75,15 +75,15 @@ namespace NUS.TheAmagingRace.DAL.UnitOfWork
             }
         }
 
-        public RoleManager<IdentityRole> RoleRepository
+        public GenericRepository<IdentityRole> RoleRepository
         {
             get
             {
                 if (this._roleRepository == null) { 
-                    var store = new RoleStore<IdentityRole>(_context);
-                    var manager = new RoleManager<IdentityRole>(store);
+                    this._roleRepository = new GenericRepository<IdentityRole>(_context);
+                   
                    }
-                return _roleRepository;
+                return this._roleRepository;
             }
         }
         #endregion

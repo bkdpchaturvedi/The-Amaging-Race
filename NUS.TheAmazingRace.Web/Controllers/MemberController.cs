@@ -127,5 +127,32 @@ namespace NUS.TheAmazingRace.Web.Controllers
             var Staff = memberBAL.GetAllStaff();
             return PartialView(Staff);
         }
+
+
+        [HttpPost]
+        public ActionResult UpdateToAdmin(string userID)
+        {
+            memberBAL.MoveMembertoAdmin(userID);
+            return new EmptyResult();
+        }
+
+        [HttpPost]
+        public ActionResult UpdateToStaff(string userID)
+        {
+            memberBAL.MoveMembertoStaff(userID);
+            return new EmptyResult();
+        }
+        [HttpPost]
+        public ActionResult RemoveasStaff(string userID)
+        {
+            memberBAL.RemoveMemberasStaff(userID);
+            return new EmptyResult();
+        }
+        [HttpPost]
+        public ActionResult RemoveasAdmin(string userID)
+        {
+            memberBAL.RemoveMemberasAdmin(userID);
+            return new EmptyResult();
+        }
     }
 }

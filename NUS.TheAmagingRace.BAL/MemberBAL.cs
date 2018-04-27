@@ -52,9 +52,13 @@ namespace NUS.TheAmagingRace.BAL
             using (var scope = new TransactionScope())
             {
                 IdentityUserRole userRole = new IdentityUserRole();
-                userRole.RoleId = _unitOfWork.RoleRepository.Roles.First(m => m.Name == RoleName)?.Id;
+                string roleid= _unitOfWork.RoleRepository.GetFirst(m => m.Name == RoleName)?.Id;
+                userRole.RoleId = roleid;
                 userRole.UserId = tARUser.Id;
-                tARUser.Roles.Add(userRole);
+                if (!tARUser.Roles.Any(m => m.RoleId == roleid))
+                {
+                    tARUser.Roles.Add(userRole);
+                }
                 _unitOfWork.Save();
                 scope.Complete();
             }
@@ -64,10 +68,13 @@ namespace NUS.TheAmagingRace.BAL
             using (var scope = new TransactionScope())
             {
                 IdentityUserRole userRole = new IdentityUserRole();
-                userRole.RoleId = _unitOfWork.RoleRepository.Roles.First(m => m.Name == RoleName)?.Id;
-                userRole.UserId = tARUser.Id;
-                tARUser.Roles.Remove(userRole);
-                _unitOfWork.Save();
+                IdentityRole role = _unitOfWork.RoleRepository.GetWithInclude(m => m.Name == RoleName, "Users").First();
+                userRole= tARUser.Roles.FirstOrDefault(m=>m.RoleId==role.Id);
+                if (userRole != null)
+                {
+                    role.Users.Remove(userRole);
+                }
+                               _unitOfWork.Save();
                 scope.Complete();
             }
         }
@@ -96,23 +103,28 @@ namespace NUS.TheAmagingRace.BAL
 
         public IEnumerable<TARUserViewModel> GetAllMember()
         {
-            var Users = _unitOfWork.UserRepository.GetMany(m => m.Roles.Any(n => n.RoleId == _unitOfWork.RoleRepository.Roles.First(v => !(v.Name.Equals("Staff") || v.Name.Equals("Admin")))?.Id)).ToList();
-            var UserViewModels = Mapper.Map<List<TARUser>, List<TARUserViewModel>>(Users);
+            IdentityRole Staffrole = _unitOfWork.RoleRepository.GetFirst(m => m.Name == "Staff");
+            IdentityRole Adminrole = _unitOfWork.RoleRepository.GetFirst(m => m.Name == "Admin");
+            var users = _unitOfWork.UserRepository.GetWithInclude(m => !(m.Roles.Any(n => n.RoleId == Staffrole.Id)) && !(m.Roles.Any(n => n.RoleId == Adminrole.Id)), "Roles");
+            var UserViewModels = Mapper.Map<List<TARUser>, List<TARUserViewModel>>(users.ToList());
             return UserViewModels;
 
         }
 
         public IEnumerable<TARUserViewModel> GetAllStaff()
         {
-            var Users = _unitOfWork.UserRepository.GetMany(m=>m.Roles.Any(n=>n.RoleId ==_unitOfWork.RoleRepository.Roles.First(v=>v.Name=="Staff")?.Id)).ToList();
-            var UserViewModels = Mapper.Map<List<TARUser>, List<TARUserViewModel>>(Users);
+            IdentityRole Staffrole = _unitOfWork.RoleRepository.GetFirst(m => m.Name == "Staff");
+           
+            var users = _unitOfWork.UserRepository.GetWithInclude(m => (m.Roles.Any(n => n.RoleId == Staffrole.Id)), "Roles");
+            var UserViewModels = Mapper.Map<List<TARUser>, List<TARUserViewModel>>(users.ToList());
             return UserViewModels;
         }
 
         public IEnumerable<TARUserViewModel> GetAllTARAdministrators()
         {
-            var Users = _unitOfWork.UserRepository.GetMany(m => m.Roles.Any(n => n.RoleId == _unitOfWork.RoleRepository.Roles.First(v => v.Name == "Admin")?.Id)).ToList();
-            var UserViewModels = Mapper.Map<List<TARUser>, List<TARUserViewModel>>(Users);
+            IdentityRole Adminrole = _unitOfWork.RoleRepository.GetFirst(m => m.Name == "Admin");
+            var users = _unitOfWork.UserRepository.GetWithInclude(m => (m.Roles.Any(n => n.RoleId == Adminrole.Id)),"Roles");
+            var UserViewModels = Mapper.Map<List<TARUser>, List<TARUserViewModel>>(users.ToList());
             return UserViewModels;
         }
 
@@ -121,7 +133,12 @@ namespace NUS.TheAmagingRace.BAL
            TARUser tARUser= Mapper.Map<TARUserViewModel,TARUser>(user);
             AddUserToRole(tARUser, "Admin");
          }
-
+        public void MoveMembertoAdmin(string userid)
+        {
+            
+            TARUser tARUser = _unitOfWork.UserRepository.GetByID(userid);
+            AddUserToRole(tARUser, "Admin");
+        }
         public void MoveMembertoStaff(TARUserViewModel user)
         {
             TARUser tARUser = Mapper.Map<TARUserViewModel, TARUser>(user);
@@ -149,6 +166,24 @@ namespace NUS.TheAmagingRace.BAL
                 _unitOfWork.Save();
                 scope.Complete();
             }
+        }
+
+        public void MoveMembertoStaff(string userid)
+        {
+            TARUser tARUser = _unitOfWork.UserRepository.GetByID(userid);
+            AddUserToRole(tARUser, "Staff");
+        }
+
+        public void RemoveMemberasAdmin(string userid)
+        {
+            TARUser tARUser = _unitOfWork.UserRepository.GetByID(userid);
+            RemoveUserToRole(tARUser, "Admin");
+        }
+
+        public void RemoveMemberasStaff(string userid)
+        {
+            TARUser tARUser = _unitOfWork.UserRepository.GetByID(userid);
+            RemoveUserToRole(tARUser, "Staff");
         }
     }
 }

@@ -17,6 +17,12 @@ namespace NUS.TheAmagingRace.BAL
         void MoveMembertoStaff(TARUserViewModel user);
         void RemoveMemberasAdmin(TARUserViewModel user);
         void RemoveMemberasStaff(TARUserViewModel user);
+
+        void MoveMembertoAdmin(string userid);
+        void MoveMembertoStaff(string userid);
+        void RemoveMemberasAdmin(string userid);
+        void RemoveMemberasStaff(string userid);
+
         void AddStaff(TARUserViewModel user);
         void AddMember(TARUserViewModel user);
         void AddAdministrator(TARUserViewModel user);

@@ -37,6 +37,13 @@ namespace NUS.TheAmagingRace.BAL
             return Mapper.Map<List<Team>, List<TeamViewModel>>(e.Teams.ToList()).ToList();
         }
 
+        /*<summary>
+          * Fetched list of teams registered for an event based on eventId
+        </summary>
+        <returns>
+          List of teams
+        </returns>*/
+        /// <param name="EventId"></param>
         public List<Team> GetTeamByEvent(int EventId)
         {
             var teams = from s in db.Teams
@@ -68,6 +75,14 @@ namespace NUS.TheAmagingRace.BAL
             }
         }
 
+        /*<summary>
+          * Updates Team details from the values returned by the WEB API
+        </summary>
+        <returns>
+         Saves vaues to Teams DB
+        </returns>*/
+        /// <param name="teamLocations"></param>
+        /// <param name="EventID"></param>
         public void updateTeamLocation(List<TeamLocation> teamLocations, int EventID)
         {
             for(int i=0; i<teamLocations.Count; i++)

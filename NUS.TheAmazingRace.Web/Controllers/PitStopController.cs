@@ -21,25 +21,51 @@ namespace NUS.TheAmazingRace.Web.Controllers
         private TARDBContext db = new TARDBContext();
         // GET: PitStop
 
-        public ActionResult Index(int EventID=0)
+        /*<summary>
+          * Fetched the current event details based on event ID
+          * calls pItStopBAL to fet pitStops for the event
+        </summary>
+        <returns>
+          View of the List of pitStops
+        </returns>*/
+        /// <param name="EventID"></param>
+        public ActionResult Index(int EventID = 0)
         {
             Session["eventId"] = EventID;
             Event currentEvent = eventBAL.GetSelectedEvent(EventID);
             return PartialView("_Index", pitStopBAL.getPitStopOfEvent(EventID));
         }
 
+        /*<summary>
+          * Fetches PitStops from PitStopBAL based on event ID
+        </summary>
+        <returns>
+          Json object of the List of pitStops
+        </returns>*/
         public JsonResult GetPitStopData()
         {
             int EventID = Convert.ToInt32(Session["eventId"]);
-            return Json(pitStopBAL.getPitStopOfEvent(EventID),JsonRequestBehavior.AllowGet);
+            return Json(pitStopBAL.getPitStopOfEvent(EventID), JsonRequestBehavior.AllowGet);
         }
 
+        /*<summary>
+          * Fetches PitStops from PitStopBAL based on PitStop ID
+        </summary>
+        <returns>
+          Json object of the pitStops details
+        </returns>*/
         public JsonResult GetPitStop()
         {
             int pitStopId = Convert.ToInt32(Session["pitStopId"]);
             return Json(pitStopBAL.getPitStopOfPitStopId(pitStopId), JsonRequestBehavior.AllowGet);
         }
 
+        /*<summary>
+          * creates pitStop
+        </summary>
+        <returns>
+          dialog View of the pitStop creation
+        </returns>*/
         public ActionResult CreatePitStop()
         {
             TARDBContext userList = new TARDBContext();
@@ -47,21 +73,28 @@ namespace NUS.TheAmazingRace.Web.Controllers
 
             var getRole = (from r in db.Roles where r.Name.Contains("Staff") select r).FirstOrDefault();
             var getStaffUsers = db.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(getRole.Id)).ToList();
-            
+
             foreach (var item in getStaffUsers)
             {
-               
-              
+
+
                 ListOfUsers.Add(new SelectListItem() { Text = item.UserName, Value = item.UserName });
 
 
             }
 
             ViewBag.StaffList = ListOfUsers;
-            
+
             return PartialView("_CreatePitStop");
         }
 
+        /*<summary>
+          * Edit pitStop
+        </summary>
+        <returns>
+          dialog View of the pitStop Edit along with pitStop details
+        </returns>*/
+        /// <param name="pitStopId"></param>
         public ActionResult EditPitStops(int pitStopId)
         {
 
@@ -84,6 +117,13 @@ namespace NUS.TheAmazingRace.Web.Controllers
             return PartialView("_EditPitStop", pitStopBAL.GetSelectedPitStop(pitStopId));
         }
 
+        /*<summary>
+          * Creates new pitStop
+        </summary>
+        <returns>
+          view of the list of PitStops
+        </returns>*/
+        /// <param name="pitStop"></param>
         [HttpPost]
         public async System.Threading.Tasks.Task<ActionResult> AddPitStop(PitStop pitStop)
         {
@@ -98,7 +138,7 @@ namespace NUS.TheAmazingRace.Web.Controllers
             if (seq != null)
             {
                 ModelState.AddModelError("CustomError", "Sequence Number already exists");
-                
+
 
                 Response.Write("<script>alert('Sequence Number should be Unique')</script>");
 
@@ -112,16 +152,29 @@ namespace NUS.TheAmazingRace.Web.Controllers
             return PartialView("_Index", pitStops);
         }
 
+        /*<summary>
+          * Delete pitStop
+        </summary>
+        <returns>
+          dialog View of the pitStop Delete
+        </returns>*/
+        /// <param name="pitStopId"></param>
         public ActionResult DeletePitStop(int pitStopId)
         {
             int eventID = Convert.ToInt32(Session["eventId"]);
             List<PitStop> pitStop = pitStopBAL.DeletePitStopfromList(pitStopId, eventID);
             return PartialView("_Index", pitStop);
         }
+
+        /// <summary>
+        /// Fetch pitStop details fron pitStopBAL
+        /// </summary>
+        /// <param name="pitStopId"></param>
+        /// <returns>View of the pitStop details</returns>
         public ActionResult PitstopDetails(int pitStopId)
         {
 
-            return PartialView("_PitStopDetails",pitStopBAL.GetSelectedPitStop(pitStopId));
+            return PartialView("_PitStopDetails", pitStopBAL.GetSelectedPitStop(pitStopId));
         }
     }
 

@@ -13,6 +13,11 @@ namespace NUS.TheAmazingRace.Web.Controllers
     {
         private TeamBAL teamBAL = new TeamBAL();
         // GET: Hub
+
+        /*<summary>
+          * SiganlR broadCast method to javaScript
+        </summary>*/
+        /// <param name="EventId"></param>
         public void CallSignalR(int EventId)
         {
             var mappingHub = GlobalHost.ConnectionManager.GetHubContext<MappingHub>();

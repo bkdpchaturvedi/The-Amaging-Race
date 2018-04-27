@@ -1,4 +1,7 @@
-﻿
+﻿/*<summary>
+	* saves the pitStop values in DB and shows the crested pit stops in UI.
+</summary>
+*/
 function CreatePitStop() {
     var url = "/PitStop/AddPitStop";
 
@@ -17,6 +20,11 @@ function CreatePitStop() {
         }
     });
 }
+
+/*<summary>
+	* Fetch values fromDB and shows in EditPit Stop page.
+</summary>
+*/
 function pitStopEdit() {
 
     var latlng = new google.maps.LatLng(1.281766, 103.818346);
@@ -57,7 +65,7 @@ function pitStopEdit() {
         geocoder.geocode({ "latLng": location }, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 
-                $('#Address').val(results[0].formatted_address);
+                $('#editAddress').val(results[0].formatted_address);
                 $('#Latitude').val(results[0].geometry.location.lat);
                 $('#Longitude').val(results[0].geometry.location.lng);
             }
@@ -75,12 +83,15 @@ function pitStopEdit() {
             map: map
         });
         map.panTo(location);
-        marker.setMap(location);
     }
 
 
 }
 
+/*<summary>
+	* To create a pitStop, In UI it shows maps and creation details
+</summary>
+*/
 function pitStopLocate() {
     
         var latlng = new google.maps.LatLng(1.281766, 103.818346);
@@ -91,20 +102,7 @@ function pitStopLocate() {
     };
     var map = new google.maps.Map(document.getElementById("mapCreate"), mapOptions);
     
-    var currentLatitude = $('#Latitude').val();
-    var currentLongitude = $('#Longitude').val();
-    var marker;
-    var url = "/PitStop/GetPitStop";
-    $.ajax({
-        type: "GET",
-        url: url,
-        success: function (data) {
-            currentLatitude = data[0].Latitude;
-            currentLongitude = data[0].Longitude;
-            var currentLocation = new google.maps.LatLng(currentLatitude, currentLongitude);
-        }
-
-    });
+    
     
     var inputBox = new google.maps.places.SearchBox(document.getElementById('mapSearch'));
     inputBox.bindTo('bounds', map);
@@ -137,11 +135,14 @@ function pitStopLocate() {
                 map: map
             });
             map.panTo(location);
-            marker.setMap(location);
         }
     
 }
 
+/*<summary>
+	* Shows edit dialog box
+</summary>
+*/
 var EditPitStop = function (pitStopId) {
     var url = "/PitStop/EditPitStops?pitStopId=" + pitStopId;
 
@@ -157,6 +158,11 @@ var VewPitstop = function (pitStopId) {
         $("#ModalviewPit").modal("show");
     });
 };
+
+/*<summary>
+	* Saves updated values of PitStops during edit and saves in DB
+</summary>
+*/
 var UpdatePitStop = function () {
     $("#loaderDiv").show();
     var formData = $("#editPitForm").serialize();
@@ -174,12 +180,20 @@ var UpdatePitStop = function () {
     })
 }
 
+/*<summary>
+	* Shows delete pitStop dialog
+</summary>
+*/
 var deletePitStop = function (pitStipId) {
     $('#hiddenPitStopId').val(pitStipId);
     $("#deleteModel").modal('show');
 
 };
 
+/*<summary>
+	* deletes the PitStop from UI and Updates in DB
+</summary>
+*/
 var DeletePitConfirm = function () {
     $("#loaderDiv").show();
     var pitStopId = $('#hiddenPitStopId').val();

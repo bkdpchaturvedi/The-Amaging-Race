@@ -30,33 +30,73 @@ namespace NUS.TheAmazingRace.Web.Controllers
             return View();
         }
 
+        /*<summary>
+          * Shows the list of current events
+        </summary>
+        <returns>
+          View of the List of Current Events
+        </returns>*/
         public PartialViewResult CurrentEvent()
         {
             return PartialView("_CurrentEvent", eventBAL.CurrentEvent());
         }
 
+        /*<summary>
+          * Shows the list of Upcoming events
+        </summary>
+        <returns>
+          View of the List of Upcoming Events
+        </returns>*/
         public PartialViewResult UpcomingEvent()
         {
             return PartialView("_UpcomingEvent", eventBAL.UpcomingEvents());
         }
 
+        /*<summary>
+          * Stores event ID in Session on click of the event.
+          * retrives PitStops from DB based on eventId
+        </summary>
+        <returns>
+          Json Object of PitsStop
+        </returns>*/
         public JsonResult GetPitStopData()
         {
             int EventID = Convert.ToInt32(Session["eventId"]);
             return Json(pitStopBAL.getPitStopOfEvent(EventID), JsonRequestBehavior.AllowGet);
         }
 
+        /*<summary>
+          * Shows PitStops in Map.
+        </summary>
+        <returns>
+          View of the List of PitStops in Map
+        </returns>*/
+        /// <param name="eventId"></param>
         public ActionResult ShowEventData(int eventId)
         {
             Session["eventId"] = eventId;
             return PartialView("_MapView");
         }
 
+        /*<summary>
+          * Shows the teams list and their progress, registered for the selected event
+        </summary>
+        <returns>
+          View of the List of teams
+        </returns>*/
+        /// <param name="EventID"></param>
         public PartialViewResult CurrentEventBoard(int EventID)
         {
             return PartialView("_LeaderBoard", teamBAL.GetTeamByEvent(EventID));
         }
 
+        /*<summary>
+          * Web API call and SignalR setUp
+        </summary>
+        <returns>
+          Json data of StaffLoaction to track staff.
+        </returns>*/
+        /// <param name="number"></param>
         public async Task<JsonResult> GetLocations(int number)
         {
             string Baseurl = "http://localhost:51412/";

@@ -1,4 +1,12 @@
-﻿function showDashBoardMap() {
+﻿
+/*<summary>
+	* Shows the map view in Dshboard and calls the WebAPI to return and update values in DB.
+    * calls SignalR to broadCast in UI.
+</summary>
+<returns>
+    Shows DashBoard map and leaderboard
+</returns>*/
+function showDashBoardMap() {
     var latlngCenter;
     var mapOptions;
     
@@ -107,8 +115,10 @@
 
 
 
-
-
+/*<summary>
+	* set pitStops markers and its direction in Dashboard map
+</summary>
+*/
 function setDashBoardMap(data, map) {
 
 
@@ -143,7 +153,7 @@ function setDashBoardMap(data, map) {
         name = i + 1 + ". " + data[i].PitStopName;
         marker = new google.maps.Marker({
             position: latlngPit,
-            title: addressOne,
+            title: data[i].Address,
             animation: google.maps.Animation.DROP,
             label: { text: name, color: "green" },
             map: map
@@ -158,48 +168,10 @@ function setDashBoardMap(data, map) {
 
 }
 
-
-function saveLocation(apiJsonData) {
-    var url = "/Team/saveLocation";
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: { apiJsonData: JSON.stringify(apiJsonData) },
-        success: function (apiData) {
-            alert("success");
-        }
-    });
-}
-
-
-
-
-function getLocationDistance(apiJsonData) {
-    for (i = 0; i < apiJsonData.length; i++) {
-        var teamId = apiJsonData[i].teamID;
-        $("#distance_" + teamId).text(teamId);
-        $("#time_" + teamId).text(teamId);
-        
-        
-    }
-}
-
-function getDistance(latlngPit, latlngNext, latlngPitAddress, latlngNextAddress, teamId) {
-    var service = new google.maps.DistanceMatrixService();
-    //alert(latlngPit + " " + latlngNext + "  " + latlngPitAddress + " " + latlngNextAddress);
-    service.getDistanceMatrix(
-        {
-            origins: [latlngPit, latlngPitAddress],
-            destinations: [latlngNext, latlngNextAddress],
-            travelMode: 'WALKING'
-        }, callback(teamId));
-    function callback(teamId) {
-        return function callback(response, status) {
-            
-                
-        }
-    }
-}
+/*<summary>
+	* calculate routes between pitStop and set DRIVING directions
+</summary>
+*/
 function calcRoute(latlngPit, latlngNext, map) {
 
     var directionsService = new google.maps.DirectionsService();
@@ -229,7 +201,10 @@ function calcRoute(latlngPit, latlngNext, map) {
     });
 }
 
-
+/*<summary>
+	* on selection of a particular event displays the list of pitStops that even has.
+</summary>
+*/
 function ShowDashBoardPitstop(eventId) {
     // $("#loaderDiv").show();
     $("#homeEventId").val(eventId);

@@ -13,15 +13,30 @@ namespace NUS.TheAmagingRace.BAL
     {
         private TARDBContext db = new TARDBContext();
         private PitStop pitStop = new PitStop();
+
+        /*<summary>
+          * get all pitStops
+        </summary>
+        <returns>
+          returns all pitStops ordered by sequence number
+        </returns>*/
         public List<PitStop> GetPitStopList()
         {
             return db.PitStops.OrderBy(seq=>seq.SequenceNumber).ToList(); ;
         }
 
+        /*<summary>
+          * Create and edit pitStops for the eventId
+        </summary>
+        <returns>
+          List of pitStops created/updated
+        </returns>*/
+        /// <param name="pitStop"></param>
+        /// <param name="currentUser"></param>
+        /// <param name="eventId"></param>
+        /// <param name="userId"></param>
         public List<PitStop> CreatePitStopList(PitStop pitStop, string currentUser, int eventId,string userId)
         {
-
-            
             if (pitStop.PitStopID > 0)
             {
                 PitStop editPitStops = db.PitStops.SingleOrDefault(x => x.PitStopID == pitStop.PitStopID);
@@ -62,6 +77,13 @@ namespace NUS.TheAmagingRace.BAL
             return getPitStopOfEvent(eventId);
         }
 
+        /*<summary>
+          * Fetch list of pitStops for the given eventId
+        </summary>
+        <returns>
+          List of pitStops
+        </returns>*/
+        /// <param name="eventId"></param>
         public List<PitStop> getPitStopOfEvent(int eventId)
         {
             var pitstops = from s in db.PitStops
@@ -71,6 +93,13 @@ namespace NUS.TheAmagingRace.BAL
             return pitstops.OrderBy(seq => seq.SequenceNumber).ToList();
         }
 
+        /*<summary>
+          * Fetch list of pitStops and details for the given pitStopId
+        </summary>
+        <returns>
+          List of pitStops and its details
+        </returns>*/
+        /// <param name="pitStopId"></param>
         public List<PitStop> getPitStopOfPitStopId(int pitStopId)
         {
             var pitstops = from s in db.PitStops
@@ -80,6 +109,13 @@ namespace NUS.TheAmagingRace.BAL
             return pitstops.OrderBy(seq => seq.SequenceNumber).ToList();
         }
 
+        /*<summary>
+          * Fetch pitStop Details for the given pitStopId to edit pitStop
+        </summary>
+        <returns>
+          single pitStop object
+        </returns>*/
+        /// <param name="pitStopId"></param>
         public PitStop GetValuesToEdit(int pitStopId)
         {
             PitStop editPitStops = db.PitStops.SingleOrDefault(x => x.PitStopID == pitStopId);
@@ -92,6 +128,13 @@ namespace NUS.TheAmagingRace.BAL
 
         }
 
+        /*<summary>
+          * Fetch pitStop and details for the given pitStopId
+        </summary>
+        <returns>
+          single pitStop object
+        </returns>*/
+        /// <param name="PitSTopId"></param>
         public PitStop GetSelectedPitStop(int PitSTopId)
         {
             PitStop currentPitStop = db.PitStops.SingleOrDefault(x => x.PitStopID == PitSTopId);
@@ -99,6 +142,15 @@ namespace NUS.TheAmagingRace.BAL
 
         }
 
+        /*<summary>
+          * Delets PitStop from DB
+        </summary>
+        
+        <returns>
+          list of pitstops for the event Id
+        </returns>*/
+        /// <param name="pitStopId"></param>
+        /// <param name="eventId"></param>
         public List<PitStop> DeletePitStopfromList(int pitStopId, int eventId)
         {
             var pitStop = db.PitStops.Find(pitStopId);

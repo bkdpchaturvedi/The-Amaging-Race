@@ -76,6 +76,10 @@ var AddPitStop = function () {
     });
 };
 
+/*<summary>
+	* Shows all available pitStops for the selected event in event main Map
+</summary>
+*/
 var allPitStops = function () {
     var url = "/PitStop/GetPitStopData";
     $.ajax({
@@ -110,7 +114,7 @@ var allPitStops = function () {
                 calcRoute(latlngPit, latlngNext, map);
             }
             address = data[i].Address;
-            name =i +1 + ". " + data[i].PitStopName;
+            name = data[i].SequenceNumber + ". " + data[i].PitStopName;
              marker = new google.maps.Marker({
                  position: latlngPit,
                  title: address,

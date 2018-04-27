@@ -58,8 +58,6 @@ namespace NUS.TheAmagingRace.BAL
                 editEvents.EventCity = eventModel.EventCity;
                 editEvents.StartDate = eventModel.StartDate;
                 editEvents.EndDate = eventModel.EndDate;
-                editEvents.TotalPitStops = eventModel.TotalPitStops;
-                editEvents.TotalTeams = eventModel.TotalTeams;
                 editEvents.LastModifiedBy = currentUser;
                 editEvents.LastModifiedAt = DateTime.Now;
                 editEvents.ImagePath = eventModel.ImagePath;

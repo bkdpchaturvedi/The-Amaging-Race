@@ -1,15 +1,17 @@
 ﻿@model IEnumerable<NUS.TheAmagingRace.DAL.Event>
 <script src="~/Scripts/Custom/EventManagement.js"></script>
 <script src="~/Scripts/Custom/PitStop.js"></script>
-
 <link href="~/Assets/css/scrollBar.css" rel="stylesheet" />
+
 <style>
     input#SearchString {
         padding-left: 10px;
     }
 </style>
+
 <a href="#" class="btn btn-success" onclick="AddEvent()">Create</a><br />
 <br />
+
 <div class="input-group">
     <input type="text" style="width:170px" placeholder="search an event" id="SearchString" /> &nbsp;
     <a href="#" id="btnSearch" class="btn btn-success">Go</a>
@@ -17,16 +19,17 @@
 
 @if (Model.Count() > 0)
 {
-
-    <div id="style-3" style="max-height:475px; overflow:auto">
-
+    <div id="style-3" overflow:auto">
         <div class="force-overflow">
             @foreach (var v in Model)
             {
                 var id = "EventCard_" + v.EventID;
                 <div class="card" style="width:18em" id='@id.ToString()'>
+                    
                     <div class="card-content">
+                        
                         <div class="card-header">
+                        
                             <div class="card-heading">
                                 <div style="float:right">
                                     <a href="#" class="glyphicon glyphicon-pencil" onclick="EditEvent(@v.EventID)"></a>&nbsp;
@@ -39,19 +42,22 @@
                                 </h5>
                             </div>
                         </div>
-                        <div class="card-body" onclick="ShowPitstop(@v.EventID)">
-                            <p class="card-p">
-                                <i>@v.EventDescription</i><br />
-                                Total Pitstops&nbsp;: @v.TotalPitStops<br />
-                                Total Teams &nbsp; : @v.TotalTeams<br />
-                            </p>
+        
+                        <div style="height:60px"class="card-body" onclick="ShowPitstop(@v.EventID)">
+                            <div class="card-p">
+                                <i>@v.EventDescription</i><br /><br />
+                                Start Date : <i>@v.StartDate.Day-@v.StartDate.Month-@v.StartDate.Year</i><br />
+                                End Date &nbsp; : <i>@v.EndDate.Day-@v.EndDate.Month-@v.EndDate.Year</i>
+                            </div>
                         </div>
+                      
                         <div class="card-footer">
                             <strong>Last modified by : </strong>@v.LastModifiedBy
                         </div>
                     </div>
                 </div>
             }
+            
             <input type="hidden" id="hiddenEventId" />
         </div>
     </div>

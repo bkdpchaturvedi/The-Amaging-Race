@@ -35,17 +35,22 @@
 
 <div class="modal fade" id="myModal">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" align="center">
+
             <div class="modal-header">
                 <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h3 class="modal-title">Delete Event</h3>
+                <h3 class="modal-title" align="center">Delete Event</h3>
             </div>
-            <div class="modal-body">
+
+            <div class="modal-body" align="center">
                 <h4>Are you sure to delete this?</h4>
             </div>
+
             <div class="modal-footer">
-                <a href="#" class="btn btn-default" data-dismiss="modal">cancel</a>
-                <a href="#" class="btn btn-success" onclick="DeleteEvent()">Confirm</a>
+                <div align="center">
+                    <a href="#" class="btn btn-danger" data-dismiss="modal">cancel</a>
+                    <a href="#" class="btn btn-success" onclick="DeleteEvent()">Confirm</a>
+                </div>
             </div>
         </div>
     </div>
@@ -54,25 +59,26 @@
 <div class="modal fade" id="ModalEdit">
     <div class="modal-dialog">
         <div class="modal-content">
+
             <div class="modal-header">
                 <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h3 class="modal-title">Edit Event</h3>
+                <h3 class="modal-title" align="center">Edit Event</h3>
             </div>
+
             <div class="modal-body" id="ModalBodyEdit">
             </div>
         </div>
     </div>
 </div>
 
+
+
 <div class="modal fade" id="ModalAdd">
-    <div style="text-align:center;display:none" id="loaderDiv">
-        <img src="~/Content/Images/InternetSlowdown_Day.gif" width="150" />
-    </div>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h3 class="modal-title">Create Event</h3>
+                <h3 class="modal-title" align="center">Create Event</h3>
             </div>
             <div class="modal-body" id="ModalBodyAdd">
             </div>
@@ -92,7 +98,77 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="deleteModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title" align="center">Delete PitStop</h3>
+            </div>
 
+            <div class="modal-body">
+                <h4 align="center">Are you sure to delete this?</h4>
+                <div style="text-align:center;display:none" id="loaderDiv">
+                    <img src="~/Content/Images/InternetSlowdown_Day.gif" width="150" />
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div align="center">
+                    <a href="#" class="btn btn-danger" data-dismiss="modal">cancel</a>
+                    <a href="#" class="btn btn-success" onclick="DeletePitConfirm()">Confirm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ModalAddPit">
+    <div class="modal-dialog" style="width:800px">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title" align="center">Create PitStop</h3>
+            </div>
+
+            <div class="modal-body" id="ModalBodyAddPit">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ModalviewPit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title" align="center">PitStop Details</h3>
+            </div>
+
+            <div class="modal-body" id="ModalBodyviewPit">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ModalEditPit">
+    <div class="modal-dialog" style="width:800px">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title" align="center">Edit PitStop</h3>
+            </div>
+
+            <div class="modal-body" id="ModalBodyEditPit">
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <script>
     $("#TeamsTabbtn").click(function (e) {

@@ -8,16 +8,14 @@ namespace NUS.TheAmagingRace.DAL
         [Key]
         public int PitStopID { get; set; }
         [Required(ErrorMessage = "Pitstop Name is mandatory")]
+        [Display(Name ="Name")]
         public string PitStopName { get; set; }
-
-       
-
         public string Latitude { get; set; }
-
         public string Longitude { get; set; }
         [Required(ErrorMessage = "Sequence Number is mandatory")]
         [Index(IsUnique = true)]
-        
+        [Display(Name = "Order")]
+
         public int SequenceNumber { get; set; }
 
         public string Address { get; set; }

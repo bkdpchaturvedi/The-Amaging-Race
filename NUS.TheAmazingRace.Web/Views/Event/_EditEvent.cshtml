@@ -12,7 +12,6 @@
     }
 </style>
 
-
 <form id="editForm">
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.EventID, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -65,20 +64,6 @@
                 @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.TotalPitStops, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TotalPitStops, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TotalPitStops, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.TotalTeams, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TotalTeams, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TotalTeams, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -89,9 +74,7 @@
                 </label>
                 click on the image to upload
             </div>
-
         </div>
-
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -109,6 +92,7 @@
     @Scripts.Render("~/bundles/jqueryval")
 
 }
+
 <script>
     $(document).ready(function () {
         $("#btnsubmit").click(function () {
@@ -126,28 +110,22 @@
                     $("#refresh").empty();
                     $("#refresh").html("<div class='NorecordFound'><br /> <p> Select an event to view Pit stops</p> </div>");
                     $("#LoadEvent").html(data);
-
-
                 }
             })
-
         })
     })
 </script>
+
 <script>
     function readURL(input) {
-
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-
             reader.onload = function (e) {
                 $('#eventEditImageId').attr('src', e.target.result);
             }
-
             reader.readAsDataURL(input.files[0]);
         }
     }
-
     $("#imgEditEvent").change(function () {
         readURL(this);
     });

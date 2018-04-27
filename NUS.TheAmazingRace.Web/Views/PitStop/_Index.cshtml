@@ -15,11 +15,13 @@
         <a href="#" class="btn btn-success" onclick="AddPitStop()">Create</a>
         <div class="row">
             <div id="PitstopLoad">
+
                 <div class="col-lg-4" id="style-3" style="max-height:475px; overflow:auto">
                     @foreach (var v in Model)
                     {
                         var PitId = "PitStopCard_" + v.PitStopID;
                         <div class="card" style="width: 22rem; height: 9rem" id='@PitId.ToString()'>
+
                             <div class="card-content">
                                 <div class="card-header">
                                     <div class="card-heading">
@@ -31,6 +33,7 @@
                                         <h5 style="padding-left:30px"><strong>@v.SequenceNumber.@v.PitStopName</strong> </h5>
                                     </div>
                                 </div>
+
                                 <div class="card-body" style="height:30px">
                                     <p class="card-p">
                                         <i>@v.Address</i><br />
@@ -45,6 +48,7 @@
                     }
                     <input type="hidden" id="hiddenEventId" />
                 </div>
+
                 <div class="col-lg-8">
                     @if (Model.Count() > 0)
                     {
@@ -74,69 +78,8 @@ else
 
 <input type="hidden" id="hiddenPitStopId" />
 
-<div class="modal fade" id="deleteModel">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h3 class="modal-title">Delete PitStop</h3>
-            </div>
-            <div class="modal-body">
-                <h4>Are you sure to delete this?</h4>
-                <div style="text-align:center;display:none" id="loaderDiv">
-                    <img src="~/Content/Images/InternetSlowdown_Day.gif" width="150" />
-                </div>
-            </div>
-            <div class="modal-footer">
-                <a href="#" class="btn btn-default" data-dismiss="modal">cancel</a>
-                <a href="#" class="btn btn-success" onclick="DeletePitConfirm()">Confirm</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="ModalAddPit">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h3 class="modal-title">Create PitStop</h3>
-            </div>
-            <div class="modal-body" id="ModalBodyAddPit">
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="ModalviewPit">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h3 class="modal-title">PitStop Details</h3>
-            </div>
-            <div class="modal-body" id="ModalBodyviewPit">
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="ModalEditPit">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h3 class="modal-title">Edit PitStop</h3>
-            </div>
-            <div class="modal-body" id="ModalBodyEditPit">
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
     $(document).ready(function () {
         allPitStops();
     });
 </script>
-

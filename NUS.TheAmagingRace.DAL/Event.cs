@@ -38,14 +38,6 @@ namespace NUS.TheAmagingRace.DAL
         [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
 
-        [Required]
-        [Display(Name = "PitStops")]
-        public int TotalPitStops { get; set; }
-
-        [Required]
-        [Display(Name = "Teams")]
-        public int TotalTeams { get; set; }
-
         [Display(Name = "Upload Image")]
         public string ImagePath { get; set; }
 

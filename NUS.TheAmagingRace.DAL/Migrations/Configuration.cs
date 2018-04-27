@@ -1,5 +1,7 @@
 namespace NUS.TheAmagingRace.DAL.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -13,20 +15,90 @@ namespace NUS.TheAmagingRace.DAL.Migrations
             ContextKey = "NUS.TheAmagingRace.DAL.TARDBContext";
         }
 
-        protected override void Seed(NUS.TheAmagingRace.DAL.TARDBContext context)
+        protected async override void Seed(TARDBContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            if (!context.Roles.Any(r => r.Name == "Admin"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "Admin" };
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+                manager.Create(role);
+            }
+            if (!context.Roles.Any(r => r.Name == "Staff"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "Staff" };
+
+                manager.Create(role);
+            }
+            if (!context.Roles.Any(r => r.Name == "Member"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "Member" };
+
+                manager.Create(role);
+            }
+            if (!context.Users.Any(r => r.UserName == "Admin@Admin.com"))
+            {
+                var store = new UserStore<TARUser>(context);
+                var manager = new UserManager<TARUser>(store);
+                var user = new TARUser { UserName = "Admin@Admin.com", Email = "Admin@Admin.com", DisplayName = "Admin", ImagePath = "~/Content/Images/Empty_pic.png" };
+                var result = manager.Create(user, "Admin@123");
+
+            }
+            if (!context.Users.Any(r => r.UserName == "Staff@Staff.com"))
+            {
+                var store = new UserStore<TARUser>(context);
+                var manager = new UserManager<TARUser>(store);
+                var user = new TARUser { UserName = "Staff@Staff.com", Email = "Staff@Staff.com", DisplayName = "Staff", ImagePath = "~/Content/Images/Empty_pic.png" };
+                var result = manager.Create(user, "Staff@123");
+
+            }
+            if (!context.Users.Any(r => r.UserName == "Member@Member.com"))
+            {
+                var store = new UserStore<TARUser>(context);
+                var manager = new UserManager<TARUser>(store);
+                var user = new TARUser { UserName = "Member@Member.com", Email = "Member@Member.com", DisplayName = "Member", ImagePath = "~/Content/Images/Empty_pic.png" };
+                var result = manager.Create(user, "Member@123");
+
+            }
+
+
+            context.SaveChanges();
+
+            if (context.Users.Any(r => r.UserName == "Admin@Admin.com"))
+            {
+                var store = new UserStore<TARUser>(context);
+                var manager = new UserManager<TARUser>(store);
+                var user = context.Users.FirstOrDefault(r => r.UserName == "Admin@Admin.com");
+                var role = context.Roles.FirstOrDefault(r => r.Name == "Admin");
+                user.Roles.Add(new IdentityUserRole() { UserId = user.Id, RoleId = role.Id });
+
+            }
+            if (context.Users.Any(r => r.UserName == "Staff@Staff.com"))
+            {
+                var store = new UserStore<TARUser>(context);
+                var manager = new UserManager<TARUser>(store);
+                var user = context.Users.FirstOrDefault(r => r.UserName == "Staff@Staff.com");
+                var role = context.Roles.FirstOrDefault(r => r.Name == "Staff");
+                user.Roles.Add(new IdentityUserRole() { UserId = user.Id, RoleId = role.Id });
+
+            }
+            if (context.Users.Any(r => r.UserName == "Member@Member.com"))
+            {
+                var store = new UserStore<TARUser>(context);
+                var manager = new UserManager<TARUser>(store);
+                var user = context.Users.FirstOrDefault(r => r.UserName == "Member@Member.com");
+                var role = context.Roles.FirstOrDefault(r => r.Name == "Member");
+                user.Roles.Add(new IdentityUserRole() { UserId = user.Id, RoleId = role.Id });
+
+            }
+            context.SaveChanges();
+
+
         }
     }
 }

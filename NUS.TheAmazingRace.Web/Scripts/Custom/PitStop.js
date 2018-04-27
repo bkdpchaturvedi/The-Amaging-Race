@@ -76,6 +76,7 @@ function pitStopEdit() {
         marker = new google.maps.Marker({
             position: location,
             title: 'PitStop',
+            icon: "/Content/Images/pitStop.png",
             map: map
         });
         map.panTo(location);
@@ -89,7 +90,7 @@ function pitStopEdit() {
 </summary>
 */
 function pitStopLocate() {
-    
+    var marker;
         var latlng = new google.maps.LatLng(1.281766, 103.818346);
     var mapOptions = {
         center: latlng,
@@ -98,7 +99,7 @@ function pitStopLocate() {
     };
     var map = new google.maps.Map(document.getElementById("mapCreate"), mapOptions);
     
-    map.addListener("click", function (event) {
+    google.maps.event.addListener(map, "click", function (event) {
             placeMarker(event.latLng, map);
             getAddress(event.latLng);
         });
@@ -122,6 +123,7 @@ function pitStopLocate() {
             marker = new google.maps.Marker({
                 position: location,
                 title: 'PitStop',
+                icon: "/Content/Images/pitStop.png",
                 map: map
             });
             map.panTo(location);

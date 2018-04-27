@@ -69,7 +69,7 @@ function showDashBoardMap() {
             window["staffCount" + staffId] = new google.maps.Marker({
                 position: latlngLocations,
                 title: "Staff :" + staffId,
-                icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                icon: '/Content/Images/staff.png',
                 visible: true,
                 map: map
             });
@@ -89,7 +89,7 @@ function showDashBoardMap() {
             locationTracker(l.Latitude, l.Longitude, l.TeamID);
         });
         connection.start(function () {
-            alert('connection started');
+            console.log("connection established");
 
         });
 
@@ -155,7 +155,8 @@ function setDashBoardMap(data, map) {
             position: latlngPit,
             title: data[i].Address,
             animation: google.maps.Animation.DROP,
-            label: { text: name, color: "green" },
+            icon: "/Content/Images/pitStop.png",
+            label: { text: name, color: "#801334" },
             map: map
         });
     

@@ -118,7 +118,8 @@ var allPitStops = function () {
              marker = new google.maps.Marker({
                  position: latlngPit,
                  title: address,
-                 label: { text: name, color: "green" },
+                 icon: "/Content/Images/pitStop.png",
+                 label: { text: name, color: "#801334" },
                 map: map
             });
             //marker.setMap(latlngPit);

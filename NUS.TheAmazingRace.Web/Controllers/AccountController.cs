@@ -16,8 +16,8 @@ namespace NUS.TheAmazingRace.Web.Controllers
 {
     /*<summary>
 	This is the Controller class for Accounts,
-	the Account management CRUD operation is present here,
-	This is only authorized to Anonymous
+	The Account Creation,Remember Me,Forgot password
+    and login are present here,
 	</summary>*/
 
     [Authorize]

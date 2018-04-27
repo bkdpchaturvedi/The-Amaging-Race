@@ -68,7 +68,8 @@ namespace NUS.TheAmazingRace.Web.Controllers
 	   /* <returns>PartialView of the List of Events with new update Model </returns> */
 
 		[HttpPost]
-		public ActionResult EventsList(Event eventModel)
+        [ValidateAntiForgeryToken]
+        public ActionResult EventsList(Event eventModel)
 		{
 			//in case of editing an existing Event
 			if (eventModel.EventID > 0)

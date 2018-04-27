@@ -16,18 +16,21 @@ namespace NUS.TheAmazingRace.Web.Controllers
     [Authorize(Roles = "Staff, Admin")]
     public class PitStopController : Controller
     {
+        /*<summary>
+		    Business Access Layer(BAL) initialization
+		</summary>*/
         private PitStopBAL pitStopBAL = new PitStopBAL();
         private EventBAL eventBAL = new EventBAL();
         private TARDBContext db = new TARDBContext();
-        // GET: PitStop
+       
 
         /*<summary>
           * Fetched the current event details based on event ID
           * calls pItStopBAL to fet pitStops for the event
-        </summary>
-        <returns>
-          View of the List of pitStops
-        </returns>*/
+            </summary>
+            <returns>
+            View of the List of pitStops
+       </returns>*/
         /// <param name="EventID"></param>
         public ActionResult Index(int EventID = 0)
         {
@@ -36,11 +39,13 @@ namespace NUS.TheAmazingRace.Web.Controllers
             return PartialView("_Index", pitStopBAL.getPitStopOfEvent(EventID));
         }
 
+
+
         /*<summary>
           * Fetches PitStops from PitStopBAL based on event ID
-        </summary>
-        <returns>
-          Json object of the List of pitStops
+            </summary>
+            <returns>
+            Json object of the List of pitStops
         </returns>*/
         public JsonResult GetPitStopData()
         {
@@ -48,11 +53,13 @@ namespace NUS.TheAmazingRace.Web.Controllers
             return Json(pitStopBAL.getPitStopOfEvent(EventID), JsonRequestBehavior.AllowGet);
         }
 
+
+
         /*<summary>
           * Fetches PitStops from PitStopBAL based on PitStop ID
-        </summary>
-        <returns>
-          Json object of the pitStops details
+            </summary>
+            <returns>
+            Json object of the pitStops details
         </returns>*/
         public JsonResult GetPitStop()
         {
@@ -60,11 +67,13 @@ namespace NUS.TheAmazingRace.Web.Controllers
             return Json(pitStopBAL.getPitStopOfPitStopId(pitStopId), JsonRequestBehavior.AllowGet);
         }
 
+
+
         /*<summary>
           * creates pitStop
-        </summary>
-        <returns>
-          dialog View of the pitStop creation
+            </summary>
+            <returns>
+            dialog View of the pitStop creation
         </returns>*/
         public ActionResult CreatePitStop()
         {
@@ -73,26 +82,22 @@ namespace NUS.TheAmazingRace.Web.Controllers
 
             var getRole = (from r in db.Roles where r.Name.Contains("Staff") select r).FirstOrDefault();
             var getStaffUsers = db.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(getRole.Id)).ToList();
-
             foreach (var item in getStaffUsers)
             {
-
-
                 ListOfUsers.Add(new SelectListItem() { Text = item.UserName, Value = item.UserName });
-
-
             }
-
             ViewBag.StaffList = ListOfUsers;
 
             return PartialView("_CreatePitStop");
         }
 
+
+
         /*<summary>
-          * Edit pitStop
-        </summary>
-        <returns>
-          dialog View of the pitStop Edit along with pitStop details
+           * Edit pitStop
+            </summary>
+            <returns>
+            dialog View of the pitStop Edit along with pitStop details
         </returns>*/
         /// <param name="pitStopId"></param>
         public ActionResult EditPitStops(int pitStopId)
@@ -105,17 +110,15 @@ namespace NUS.TheAmazingRace.Web.Controllers
 
             foreach (var item in getStaffUsers)
             {
-
-
                 ListOfUsers.Add(new SelectListItem() { Text = item.UserName, Value = item.UserName });
-
-
             }
 
             ViewBag.StaffList = ListOfUsers;
             Session["pitStopId"] = pitStopId;
             return PartialView("_EditPitStop", pitStopBAL.GetSelectedPitStop(pitStopId));
         }
+
+
 
         /*<summary>
           * Creates new pitStop
@@ -125,6 +128,7 @@ namespace NUS.TheAmazingRace.Web.Controllers
         </returns>*/
         /// <param name="pitStop"></param>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async System.Threading.Tasks.Task<ActionResult> AddPitStop(PitStop pitStop)
         {
             UserManager<TARUser> UserManager = new UserManager<TARUser>(new UserStore<TARUser>(new TARDBContext()));
@@ -138,10 +142,7 @@ namespace NUS.TheAmazingRace.Web.Controllers
             if (seq != null)
             {
                 ModelState.AddModelError("CustomError", "Sequence Number already exists");
-
-
                 Response.Write("<script>alert('Sequence Number should be Unique')</script>");
-
             }
             else
             {
@@ -151,6 +152,8 @@ namespace NUS.TheAmazingRace.Web.Controllers
 
             return PartialView("_Index", pitStops);
         }
+
+
 
         /*<summary>
           * Delete pitStop
@@ -166,11 +169,14 @@ namespace NUS.TheAmazingRace.Web.Controllers
             return PartialView("_Index", pitStop);
         }
 
-        /// <summary>
-        /// Fetch pitStop details fron pitStopBAL
-        /// </summary>
-        /// <param name="pitStopId"></param>
-        /// <returns>View of the pitStop details</returns>
+
+
+        /*<summary>
+             Fetch pitStop details fron pitStopBAL
+             </summary>
+            /// <param name="pitStopId"></param>
+            <returns>View of the pitStop details
+       </returns>*/
         public ActionResult PitstopDetails(int pitStopId)
         {
 

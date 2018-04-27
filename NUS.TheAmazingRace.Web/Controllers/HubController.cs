@@ -37,11 +37,6 @@ namespace NUS.TheAmazingRace.Web.Controllers
                 };
                 mappingHub.Clients.All.locationReceived(eachTeam);
             }
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
         }
     }
 }

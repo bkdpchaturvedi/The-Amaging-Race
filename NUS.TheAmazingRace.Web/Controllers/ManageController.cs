@@ -15,6 +15,12 @@ using NUS.TheAmazingRace.Web.Models;
 
 namespace NUS.TheAmazingRace.Web.Controllers
 {
+    /*<summary>
+   This is the Controller class for ManagingAccounts,
+   The Account Updation ,Reset password and external logins 
+   and phone number verification are present here,
+   </summary>*/
+
     [Authorize]
     public class ManageController : Controller
     {

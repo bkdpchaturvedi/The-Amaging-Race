@@ -13,7 +13,6 @@ namespace NUS.TheAmagingRace.DAL
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         [Required(ErrorMessage = "Sequence Number is mandatory")]
-        [Index(IsUnique = true)]
         [Display(Name = "Order")]
 
         public int SequenceNumber { get; set; }

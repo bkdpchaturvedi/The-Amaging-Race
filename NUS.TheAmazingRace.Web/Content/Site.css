@@ -326,10 +326,6 @@ body {
 .card-body {
     margin: 2px;
 }
-    .card-body.active {
-        background: #801334;
-        color:white;
-    }
 
 .pull-left {
     float: left;

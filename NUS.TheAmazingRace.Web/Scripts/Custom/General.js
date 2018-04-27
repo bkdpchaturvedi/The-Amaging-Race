@@ -6,7 +6,7 @@
         url: url,
         data: formData,
         success: successfn,
-        error: FailureFunction
+        error: failurefn
     });
 }
 
@@ -17,7 +17,7 @@ function ajaxGet(loaderDivId, url, formData, successfn, failurefn) {
         url: url,
         data: formData,
         success: successfn,
-        error: FailureFunction
+        error: failurefn
     });
 }
 

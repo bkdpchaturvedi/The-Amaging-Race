@@ -135,24 +135,38 @@ namespace NUS.TheAmazingRace.Web.Controllers
             List<PitStop> pitStops = new List<PitStop>();
             int eventId = Convert.ToInt32(Session["eventId"]);
             String currentUser = User.Identity.GetUserName();
-            if (ModelState.IsValid)
-            {
-                var user = await UserManager.FindByNameAsync(pitStop.Staff.UserName);
-                var userId = user.Id;
-                db.PitStops.Add(pitStop);
-                var seq = db.PitStops.Where(u => u.SequenceNumber == pitStop.SequenceNumber && u.Event.EventID == pitStop.Event.EventID).FirstOrDefault();
-                if (seq != null)
-                {
-                    ModelState.AddModelError("CustomError", "Sequence Number already exists");
-                    Response.Write("<script>alert('Sequence Number should be Unique')</script>");
-                }
-                else
-                {
-                    pitStops = pitStopBAL.CreatePitStopList(pitStop, currentUser, eventId, userId);
 
-                    return PartialView("_Index", pitStops);
-                }
-            }
+            //var user = await UserManager.FindByNameAsync(pitStop.Staff.UserName);
+            //var userId = user.Id;
+            //db.PitStops.Add(pitStop);
+            //var seq = db.PitStops.Where(u => u.SequenceNumber == pitStop.SequenceNumber && u.Event.EventID == eventId).FirstOrDefault();
+            //if (seq != null)
+            //{
+            //    ModelState.AddModelError("CustomError", "Sequence Number already exists");
+            //    Response.Write("<script>alert('Sequence Number should be Unique')</script>");
+            //}
+            //else
+            //{
+            //    pitStops = pitStopBAL.CreatePitStopList(pitStop, currentUser, eventId, userId);
+            //}
+            //return PartialView("_CreatePitStop", pitStops);
+            var user = await UserManager.FindByNameAsync(pitStop.Staff.UserName);
+            var userId = user.Id;
+            db.PitStops.Add(pitStop);
+            //var seq = db.PitStops.Where(u => u.SequenceNumber == pitStop.SequenceNumber).FirstOrDefault();
+            //var seq = db.PitStops.Where(u => u.SequenceNumber == pitStop.SequenceNumber && u.Event.EventID == eventId).FirstOrDefault();
+            //if (seq != null)
+            //{
+            //    ModelState.AddModelError("CustomError", "Sequence Number already exists");
+            //    Response.Write("<script>alert('Sequence Number should be Unique')</script>");
+            //}
+            //else
+            //{
+                pitStops = pitStopBAL.CreatePitStopList(pitStop, currentUser, eventId, userId);
+
+            //    return PartialView("_Index", pitStops);
+            //}
+            //}
             List<SelectListItem> ListOfUsers = new List<SelectListItem>();
             var getRole = (from r in db.Roles where r.Name.Contains("Staff") select r).FirstOrDefault();
             var getStaffUsers = db.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(getRole.Id)).ToList();
@@ -164,7 +178,7 @@ namespace NUS.TheAmazingRace.Web.Controllers
 
             ViewBag.StaffList = ListOfUsers;
             Response.StatusCode = 202;
-            return PartialView("_CreatePitStop", pitStop);
+            return PartialView("_Index", pitStops);
         }
 
 

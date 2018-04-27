@@ -12,17 +12,11 @@ function CreatePitStop() {
         url: url,
         data: formData,
         success: function (data, status, StatusCode) {
-            debugger;
-            if (StatusCode.status == 202) {
-                $("#addPitStop").html(data);
-            }
-            else {
                 $("#loaderDiv").hide();
                 $("#ModalAddPit").modal("hide");
                 $('body').removeClass('modal-open');
                 $('.modal-backdrop').remove();
                 $("#1b").html(data);
-            }
         },
         
     });

@@ -22,18 +22,20 @@ namespace NUS.TheAmazingRace.Web.Controllers
         {
             var mappingHub = GlobalHost.ConnectionManager.GetHubContext<MappingHub>();
             List<Team> teams = teamBAL.GetTeamByEvent(EventId);
-            
+            int position;
             for (int i = 0; i<teams.Count; i++)
             {
-               var eachTeam  = new
+                position = i + 1;
+                var eachTeam = new
                 {
+                    TeamName = teams[i].TeamName,
                     TeamID = teams[i].TeamID,
                     Latitude = teams[i].Latitude,
                     Longitude = teams[i].Longitude,
                     Distance = teams[i].Distance,
                     Time = teams[i].Time,
                     NextPitStop = teams[i].NextPitStop,
-                    Position = teams[i].Position
+                    Position = position
                 };
                 mappingHub.Clients.All.locationReceived(eachTeam);
             }

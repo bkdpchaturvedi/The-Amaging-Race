@@ -48,8 +48,8 @@ namespace NUS.TheAmagingRace.BAL
         {
             var teams = from s in db.Teams
                            select s;
-            teams = teams.Where(s => s.Event.EventID == EventId);
-
+            teams = teams.OrderByDescending(s => s.Distance).Where(s => s.Event.EventID == EventId);
+     
             return teams.ToList();
         }
 

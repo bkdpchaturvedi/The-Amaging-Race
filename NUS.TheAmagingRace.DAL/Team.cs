@@ -10,8 +10,9 @@ namespace NUS.TheAmagingRace.DAL
         [Key]
         public int TeamID { get; set; }
         public string TeamName { get; set; }
+        [Display(Name ="Distance(KM)")]
         public string Distance { get; set; }
-
+        [Display(Name ="Time(Minutes)")]
         public string Time { get; set; }
 
         public int Position { get; set; }

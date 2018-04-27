@@ -81,11 +81,11 @@ function showDashBoardMap() {
         connection = $.hubConnection();
         var hub = connection.createHubProxy('mappingHub');
         hub.on('locationReceived', function (l) {
-            
             $("#distance_" + l.TeamID).text(l.Distance);
             $("#time_" + l.TeamID).text(l.Time);
             $("#nextPit_" + l.TeamID).text(l.NextPitStop);
-
+            $("#position_" + l.TeamID).text(l.Position);
+            $("#teamName_" + l.TeamID).text(l.TeamName);
             locationTracker(l.Latitude, l.Longitude, l.TeamID);
         });
         connection.start(function () {

@@ -54,10 +54,6 @@ function pitStopEdit() {
         }
 
     });
-
-    //var inputBox = new google.maps.places.SearchBox(document.getElementById('mapSearch'));
-    //inputBox.bindTo('bounds', map);
-    //map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('mapSearch'));
     
 
     function getAddress(location) {
@@ -102,11 +98,6 @@ function pitStopLocate() {
     };
     var map = new google.maps.Map(document.getElementById("mapCreate"), mapOptions);
     
-    
-    
-    var inputBox = new google.maps.places.SearchBox(document.getElementById('mapSearch'));
-    inputBox.bindTo('bounds', map);
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('mapSearch'));
     map.addListener("click", function (event) {
             placeMarker(event.latLng, map);
             getAddress(event.latLng);
@@ -116,7 +107,6 @@ function pitStopLocate() {
             var geocoder = new google.maps.Geocoder();
             geocoder.geocode({ "latLng": location }, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
-                    $('#mapSearch').val(results[0].formatted_address);
                     $('#Address').val(results[0].formatted_address);
                     $('#Latitude').val(results[0].geometry.location.lat);
                     $('#Longitude').val(results[0].geometry.location.lng);

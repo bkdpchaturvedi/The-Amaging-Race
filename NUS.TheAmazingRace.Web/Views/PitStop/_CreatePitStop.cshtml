@@ -10,6 +10,7 @@
 <script src="~/Scripts/Custom/PitStop.js"></script>
 <form id="addPitStop">
     @Html.AntiForgeryToken()
+    
     <div>
         <input type="hidden" id="eventId" />
     </div>
@@ -75,7 +76,3 @@
         pitStopLocate();
     });
 </script>
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

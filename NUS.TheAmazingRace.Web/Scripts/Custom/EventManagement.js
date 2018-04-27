@@ -52,8 +52,10 @@ var OnSuccess =  function (data) {
 
 var ShowPitstop = function (eventId) {
     $("#loaderDiv").show();
+    debugger;
+    $("#EventCard_5 .card-content .card-body").removeClass('active');
+    $(event.currentTarget).addClass('active');
     
-
     var url = "/PitStop/Index";
     $("#hiddenEventId").val(eventId);
     $.ajax({

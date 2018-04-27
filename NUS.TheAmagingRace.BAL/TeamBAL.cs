@@ -31,10 +31,9 @@ namespace NUS.TheAmagingRace.BAL
         {
             // Event @event=  _unitOfWork.EventRepository.GetByID(EventID);
             
-           Event e= _unitOfWork.EventRepository.GetWithInclude(m=>m.EventID.Equals(EventID), "Teams","PitStops").FirstOrDefault();
-           Team t = _unitOfWork.TeamRepository.GetWithInclude(m=>true, "Event","Members").FirstOrDefault();
-
-            return Mapper.Map<List<Team>, List<TeamViewModel>>(e.Teams.ToList()).ToList();
+           Event e= _unitOfWork.EventRepository.GetWithInclude(m=>m.EventID.Equals(EventID), "Teams").FirstOrDefault();
+           
+           return Mapper.Map<List<Team>, List<TeamViewModel>>(e.Teams.ToList()).ToList();
         }
 
         /*<summary>

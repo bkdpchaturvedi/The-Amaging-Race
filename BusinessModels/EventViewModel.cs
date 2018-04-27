@@ -38,13 +38,6 @@ namespace NUS.TheAmagingRace.BusinessModels
         [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
 
-        [Required]
-        [Display(Name = "PitStops")]
-        public int TotalPitStops { get; set; }
-
-        [Required]
-        [Display(Name = "Teams")]
-        public int TotalTeams { get; set; }
         public string CreatedBy { get; set; }
         public string LastModifiedBy { get; set; }
         public DateTime CreatedAt { get; set; }

@@ -1,4 +1,10 @@
-﻿
+﻿@media (min-width: 1200px) {
+
+    .container {
+        max-width: 1170px;
+        margin-left: 10px;
+    }
+}
 body {
     color: #801334;
 }
@@ -320,6 +326,10 @@ body {
 .card-body {
     margin: 2px;
 }
+    .card-body.active {
+        background: #801334;
+        color:white;
+    }
 
 .pull-left {
     float: left;
@@ -463,7 +473,12 @@ body {
         border: 1px solid white;
         border-radius: 5px;
     }
-
+.card:after {
+    background: #4b0d0d;
+    color: white !important;
+    border: 1px solid white;
+    border-radius: 5px;
+}
         .card:hover .card-heading {
             color: white !important;
         }

@@ -33,25 +33,20 @@
                     </a>
 
                 </li>
-                <li>
+                <li id="eventsidebarli">
                     <a href=" @Url.Action("Index","Event")">
                         <i class="glyphicon glyphicon-briefcase"></i>
                         Event Management
                     </a>
 
                 </li>
-                <li>
+                <li id="membersidebarli">
                     <a href=" @Url.Action("Index","Member")">
                         <i class="glyphicon glyphicon-link"></i>
                         Member Management
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <i class="glyphicon glyphicon-wrench"></i>
-                        PitStop Check in
-                    </a>
-                </li>
+         
 
             </ul>
 
@@ -92,9 +87,25 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            if (window.location.href.indexOf('@Url.Action("Index", "Event")') > 0) {
+                $("#sidebar ul > li").removeClass('active');
+                  $("#eventsidebarli").addClass('active');
+            }
+             if (window.location.href.indexOf('@Url.Action("Index", "Member")') > 0) {
+                $("#sidebar ul > li").removeClass('active');
+                 $("#membersidebarli").addClass('active');
+                }
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
             });
+            $("#sidebar ul > li").on('click', function (e) {
+                debugger;
+
+              
+                $("#sidebar ul > li").removeClass('active');
+                $(e.currentTarget).addClass('active');
+            })
+         
         });
     </script>
 

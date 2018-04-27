@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace NUS.TheAmazingRace.Web.Controllers
 {
+    [HandleError()]
     public class TeamController : Controller
     {
         TeamBAL teamBAL = null;

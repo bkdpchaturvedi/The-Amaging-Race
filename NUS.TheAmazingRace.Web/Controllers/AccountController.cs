@@ -452,6 +452,8 @@ namespace NUS.TheAmazingRace.Web.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Response.Cookies.Clear();
+            Session.Abandon();
             return RedirectToAction("Index", "Home");
         }
 

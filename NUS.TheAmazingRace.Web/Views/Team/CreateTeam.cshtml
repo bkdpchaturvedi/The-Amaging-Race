@@ -63,7 +63,7 @@
                     debugger;
                     $("#loaderDiv").hide();
                     $("#ModalAdd").modal("hide");
-                     var EventID = $("hiddenEventId").val();
+                     var EventID = $("#hiddenEventId").val();
                       if (EventID != "" != null) {
                     ajaxGet("loaderDiv", '@Url.Action("LoadTeams","Team")', { "EventID": EventID }, function (data) {
                         $("#2b").html(data);

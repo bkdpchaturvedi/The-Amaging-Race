@@ -28,10 +28,11 @@ namespace NUS.TheAmagingRace.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Add<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Add<ManyToManyCascadeDeleteConvention>();
+            modelBuilder.Entity<PitStop>().HasRequired(m => m.Event).WithMany(n => n.PitStops).WillCascadeOnDelete(true);
+            modelBuilder.Entity<Team>().HasRequired(m => m.Event).WithMany(n => n.Teams).WillCascadeOnDelete(true);
 
-            modelBuilder.Entity<PitStop>().HasOptional<Event>(m=>m.Event).WithMany().WillCascadeOnDelete(true);
- 
-            modelBuilder.Entity<Team>().HasOptional<Event>(m => m.Event).WithMany().WillCascadeOnDelete(true);
             //modelBuilder.Entity<TARUser>()
             // .Property(c => c.Id)
             // .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);

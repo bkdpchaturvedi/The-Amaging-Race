@@ -47,7 +47,7 @@
         $("#btnTeamCreate").click(function (e) {
             e.preventDefault();
             $("#loaderDiv").show();
-            debugger;
+            //debugger;
             var EventID = $("#hiddenEventId").val();
             var formData = $("#addTeamForm").serialize();
             var inputdata = {
@@ -60,7 +60,7 @@
                 data: formData,
                 success: function () {
 
-                    debugger;
+                    //debugger;
                     $("#loaderDiv").hide();
                     $("#ModalAdd").modal("hide");
                      var EventID = $("#hiddenEventId").val();

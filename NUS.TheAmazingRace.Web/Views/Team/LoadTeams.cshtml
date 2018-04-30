@@ -13,9 +13,22 @@
         {
 
             <div class="panel panel-default">
-                <div class="panel-heading">@Html.DisplayFor(modelItem => item.TeamName)</div>
+                <div class="panel-heading">@Html.DisplayFor(modelItem => item.TeamName)
+                <a href="#" class="btn btn-success btn-xs right">Add Member</a>
+                </div>
                 <div class="panel-body" id='@item.TeamID'>
+                    @if (item.Members?.Count() > 0)
+    {
 
+    }
+    else
+    {
+                <div class="">
+                    <br />
+                    <p> No Member to display </p>
+                    <p> Click Add Member</p>
+                </div>
+}
                 </div>
             </div>
 
@@ -32,7 +45,6 @@
 </div>
 <script>
     var AddTeam = function () {
-        debugger;
         var eventId = $("#hiddenEventId").val();
         ajaxGet("LoaderDiv", '@Url.Action("CreateTeam","Team")', { EventID: eventId }, function (data) {
 
@@ -42,4 +54,8 @@
        
         
     };
+
+    var AddMember = function (TeamId, EventId) {
+
+    }
 </script>

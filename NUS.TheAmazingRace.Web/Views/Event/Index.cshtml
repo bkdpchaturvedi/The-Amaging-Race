@@ -171,7 +171,7 @@
     $("#TeamsTabbtn").click(function (e) {
         var EventID = $("#hiddenEventId").val();
         if (EventID != "" != null) {
-            debugger;
+            //debugger;
             ajaxGet("loaderDiv", '@Url.Action("LoadTeams","Team")', { "EventID": EventID }, function (data) {
                 $("#2b").html(data);
             }, function (status) { });

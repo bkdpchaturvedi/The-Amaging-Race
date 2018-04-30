@@ -52,7 +52,7 @@ var OnSuccess =  function (data) {
 
 var ShowPitstop = function (eventId) {
     $("#loaderDiv").show();
-    debugger;
+    //debugger;
     $("#EventCard_5 .card-content .card-body").removeClass('active');
     $(event.currentTarget).addClass('active');
     

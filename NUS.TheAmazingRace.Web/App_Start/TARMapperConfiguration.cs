@@ -18,6 +18,7 @@ namespace NUS.TheAmazingRace.Web.App_Start
                 cfg.CreateMap<TARUser, TARUserViewModel>();
                 cfg.CreateMap<Event, EventViewModel>();
                 cfg.CreateMap<PitStop, PitStopViewModel>();
+                cfg.CreateMap<Team, TeamViewModel>();
             });
         }
     }

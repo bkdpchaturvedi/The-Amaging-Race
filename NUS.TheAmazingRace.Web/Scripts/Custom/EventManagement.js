@@ -186,3 +186,52 @@ var allPitStops = function () {
         marker.setMap(location);
     }
 }
+
+var AddMember = function () {
+    var eventId = $("#hiddenEventId").val();
+    var email = $("#Email").val();
+    var teamId = $("#teamIdNeeded").val();
+    //ajaxPost("LoaderDiv", '@Url.Action("AddMember","Team")', { formData: formData }, function () {
+    //    //$("#ModalMemberAdd").html(data);
+    //    $("#ModalMember").modal("show");
+    //}, function (error) { });
+
+    var url = "/Team/AddMember";
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: { email: email },
+        success: function (data) {
+            //setPitStopInMap(data);
+            $("#" + teamId).html(data);
+            $("#ModalMember").modal("hide");
+        }
+
+    });
+}
+
+var deleteMember = function (memberId, teamId) {
+    var url = "/Team/DeleteMember";
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: { memberId: memberId },
+        success: function (data) {
+            $("#" + teamId).html(data);
+        }
+
+    });
+}
+
+var deleteTeam = function (teamId) {
+    var url = "/Team/DeleteTeam";
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: { teamId: teamId },
+        success: function (data) {
+            $("#2b").html(data);
+        }
+
+    });
+}

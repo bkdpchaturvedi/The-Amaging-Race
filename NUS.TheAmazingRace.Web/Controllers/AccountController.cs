@@ -204,7 +204,7 @@ namespace NUS.TheAmazingRace.Web.Controllers
 
                     ModelState.Clear();
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "DashBoard");
                 }
                 AddErrors(result);
             }

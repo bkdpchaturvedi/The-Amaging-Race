@@ -14,6 +14,8 @@ namespace NUS.TheAmagingRace.BAL
 {
     public class MemberBAL : IMemberBAL
     {
+        private TARDBContext db = new TARDBContext();
+        
         private readonly UOW _unitOfWork;
         public MemberBAL()
         {
@@ -184,6 +186,60 @@ namespace NUS.TheAmagingRace.BAL
         {
             TARUser tARUser = _unitOfWork.UserRepository.GetByID(userid);
             RemoveUserToRole(tARUser, "Staff");
+        }
+
+        public List<Member> AddMembers(String email,int teamId,int eventId)
+        {
+             Member member = new Member();
+            Event events = db.Events.SingleOrDefault(x => x.EventID == eventId);
+            Team teams = db.Teams.SingleOrDefault(x => x.TeamID == teamId);
+
+            member.MemberName = email;
+            member.Event = events;
+            member.Team = teams;
+            db.Members.Add(member);
+            db.SaveChanges();
+
+            return getMembers(teamId, eventId);
+        }
+
+        public List<Member> getMembers(int teamId, int eventId)
+        {
+            List<Member> member = new List<Member>();
+
+            var members = from s in db.Members.Include("Team").Include("Event")
+                          select s;
+
+            members = members.Where(s => s.Event.EventID==eventId && s.Team.TeamID==teamId);
+
+            return members.ToList();
+        }
+
+        public Member GetMemberName(int memberId)
+        {
+            Member member = db.Members.Include("Team").Include("Event").SingleOrDefault(x => x.MemberId == memberId);
+
+            return member;
+
+        }
+
+        public void deleteMember(int memberId)
+        {
+            Member member = db.Members.SingleOrDefault(x => x.MemberId == memberId);
+            db.Members.Remove(member);
+            db.SaveChanges();
+        }
+
+        public List<Member> getMembersByTeam(int teamId)
+        {
+            List<Member> member = new List<Member>();
+
+            var members = from s in db.Members.Include("Team").Include("Event")
+                          select s;
+
+            members = members.Where(s => s.Team.TeamID == teamId);
+
+            return members.ToList();
         }
     }
 }

@@ -23,6 +23,7 @@ namespace NUS.TheAmagingRace.DAL
         public string Latitude { get; set; }
 
         public string Longitude { get; set; }
-        public virtual DbSet<TARUser> Members { get; set; }
+
+        public virtual ICollection<Member> Members { get; set; }
     }
 }

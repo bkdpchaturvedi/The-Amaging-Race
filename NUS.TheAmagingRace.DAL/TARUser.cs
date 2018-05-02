@@ -21,6 +21,7 @@ namespace NUS.TheAmagingRace.DAL
         public DateTime LastModifiedAt { get; set; }
         public string DisplayName { get; set; }
         public string ImagePath { get; set; }
+        public bool isAssigned { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<TARUser> manager)
         {
@@ -30,8 +31,13 @@ namespace NUS.TheAmagingRace.DAL
             // Add custom user claims here
             userIdentity.AddClaim(new Claim("DisplayName", DisplayName));
             userIdentity.AddClaim(new Claim("ImagePath", ImagePath));
+            userIdentity.AddClaim(new Claim("Assigned", isAssigned.ToString()));
 
-            return userIdentity;
+
+    //        userIdentity.AddClaim(
+    //new Claim(TARUser.isAssigned,
+    //isAssigned.GetValueOrDefault(false).ToString()));
+           return userIdentity;
         }
     }
         

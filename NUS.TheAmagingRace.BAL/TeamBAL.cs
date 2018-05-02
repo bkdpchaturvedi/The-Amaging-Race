@@ -52,6 +52,13 @@ namespace NUS.TheAmagingRace.BAL
             return teams.ToList();
         }
 
+        public void DeleteTeam(int teamId)
+        {
+            Team team = db.Teams.SingleOrDefault(x => x.TeamID == teamId);
+            db.Teams.Remove(team);
+            db.SaveChanges();
+        }
+
         public EventViewModel GetEventById(int EventID)
         {
           return  Mapper.Map<Event, EventViewModel>(_unitOfWork.EventRepository.GetByID(EventID));

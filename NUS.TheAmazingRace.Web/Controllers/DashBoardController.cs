@@ -132,7 +132,8 @@ namespace NUS.TheAmazingRace.Web.Controllers
         /// <param name="number"></param>
         public async Task<JsonResult> GetLocations(int number)
         {
-            string Baseurl = "http://localhost:51412/";
+            string Baseurl = System.Configuration.ConfigurationManager.AppSettings["WebApiUrl"];
+            
             int EventID = Convert.ToInt32(Session["eventId"]);
             List<TeamLocation> teamInfo = new List<TeamLocation>();
             List<StaffLocation> staffInfo = new List<StaffLocation>();

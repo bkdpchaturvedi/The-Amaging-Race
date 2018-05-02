@@ -18,6 +18,7 @@ namespace NUS.TheAmagingRace.BusinessModels
         public DateTime LastModifiedAt { get; set; }
         public string DisplayName { get; set; }
         public string ImagePath { get; set; }
+        public bool isAssigned { get; set; }
 
     }
 }
